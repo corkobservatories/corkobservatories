@@ -119,7 +119,7 @@ probe_mt01 (int request_menu) {
 
 static int
 parseMenu (const char *menu, MenuInfo *mi) {
-	static const char *versPat = "MT01 (v[[:digit:].]+[[:space:]]*\\([[:space:]]*[[:digit:]]+[[:space:]]*\\))";
+	static const char *versPat = "MT01 (v[[:digit:].]+[[:space:]]*\\([[:space:]]*[[:xdigit:]]+[[:space:]]*\\))";
 	static const char *voltPat = "Voltage:[[:space:]]*([[:digit:]]+)[[:space:]]*mV";
 	static const char *memPat  = "([[:xdigit:]]{8})/([[:xdigit:]]{8})";
 	static const char *statPat = "(Idle|Logging)";
