@@ -1,4 +1,3 @@
-#!/usr/bin/python
 from optparse import OptionParser
 import datetime
 import numpy as np
@@ -83,10 +82,13 @@ def getStatistics(Data, loggerID=None,do_plots=False):
     print "%d (%f %%) Paro readings are zero" % (NZeros, 100*NZeros/(NRecs*NParo))
     
     Dt=np.diff(vData['Time'])
-    Dts, idxs =np.unique(Dt, return_inverse=True)
-    print "Time differences\n Dt ---      #"
-    for i in range(0,len(Dts)):
-        print '%3d --- %7d' % (Dts[i], len(np.where(idxs==i)[0]))
+    try:
+        Dts, idxs =np.unique(Dt, return_inverse=True)
+        print "Time differences\n Dt ---      #"
+        for i in range(0,len(Dts)):
+            print '%3d --- %7d' % (Dts[i], len(np.where(idxs==i)[0]))
+    except:
+	print 'Old vergsion of numpy, cannot do gap analysis...!'
     
     # --- remove ID from internal temperatures ----     
     Ti=-2.95083e-006 * np.bitwise_and(vData['IDTemp'],0x00FFFFFF) + 40.0678
