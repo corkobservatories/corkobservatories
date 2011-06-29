@@ -1,0 +1,121 @@
+[RTC]
+
+# MTO1Wake delay in milliseconds (fixed).
+# TxWakeDelay  10
+
+# Sample period in seconds (user editable).
+# Sample period must evenly divide 60 (subminute) or 3600 (subhourly).
+SamplePeriod  15
+
+# Delay until temperature measurement in milliseconds (fixed).
+# ThermometerWait  500
+
+# Mode selected sample period (user editable).
+# Enter 'A' for autonomous, 'C' for cabled, '1' for 1 Hz.
+ModeSelectedPeriod  C
+
+# Delay until time stamp is sent to MT01 (edits not recommended!).
+RTCTimeStampDelay  F380
+# WARNING: Entry must be between F000 and F04D for xxx-2 type paroscientific gauges
+
+# Time to transmit 4 bytes of data from PPC (edits not recommended!).
+PPCDataXmitTime  F9
+# WARNING: F5 is the only valid entry for pressure sensors with temperature period
+
+# Number of PPC channels (user editable).
+# Maximum is 7.
+NumChannels  2
+
+# Start time (fixed). Use Synchronize Clock option in mlterm.
+# StartTime  2010/04/30 17:02:54
+
+# RTC Rate Tweak (REALLY fixed).
+# RTCRateTweak  87
+
+# RTC Identifier (REALLY fixed).
+# RTCIdent  59
+
+# 64bytes:1234567890123456789012345678901234567890123456789012345678901234
+MetaData  FolgerII sample(bytes): time(4)id(1)temp(3)temppres(8)delim(1)
+
+
+[PPC*]
+
+# Paroscientific gauge warmup in milliseconds (edits not recommended)
+SensorWarmupTime  370
+
+# in mA (edits not recommended)
+MaxSensorSteadyCurrent  10.1
+
+
+[PPC9]
+
+# Enter 0 ms for Paro-1 gauges with no temperature measurement (edits not recommended)
+TempIntegrationTime  810
+# WARNING: Only valid values are 0 for paro-1 type gauge and 400 for paro-2 gauge
+
+# in milliseconds (edits not recommended)
+PressureIntegrationTime  0
+# WARNING: Only valid value is 800
+
+# PPC Calibration Coefficients (REALLY fixed).
+# CalibrationCoefficients  E62F1A80E61A09F1
+
+# 64bytes:1234567890123456789012345678901234567890123456789012345678901234
+MetaData  T83 TP43397 MT01C01-406(544) 2005R09(rtc8e ppc9a) temperature
+
+
+[PPC1]
+
+# Enter 0 ms for Paro-1 gauges with no temperature measurement (edits not recommended)
+TempIntegrationTime  0
+# WARNING: Value differs from that of PPC 9
+
+# in milliseconds (edits not recommended)
+PressureIntegrationTime  800
+# WARNING: Value differs from that of PPC 9
+
+# PPC Calibration Coefficients (REALLY fixed).
+# CalibrationCoefficients  E79C1A59E5690A72
+
+# 64bytes:1234567890123456789012345678901234567890123456789012345678901234
+MetaData  2005S12(8c) 2nd PPC for paro-2 for pressure at 1Hz
+
+
+[MT01]
+
+# Data Baudrate (REALLY fixed)
+# Data  19200
+
+# Control Baudrate
+Cntrl  115200
+
+# Download Baudrate
+Dwnld  115200
+
+# UART LED (OFF for deployment)
+UARTLED  OFF
+
+# Power LED (OFF for deployment)
+PowerLED  OFF
+
+# Error LED (OFF for deployment)
+ErrorLED  OFF
+
+# Write LED (OFF for deployment)
+WriteLED  OFF
+
+# Pass Listen (ON to echo data over serial line)
+PassLstn  ON
+
+# Pass Talk (OFF for deployment!)
+PassTalk  OFF
+
+# Listen Mode (ASC or BIN)
+LstnMode  ASC
+
+# Low Voltage (fixed)
+# LowVolt  4960
+
+# OK Voltage (fixed)
+# OkVolt  6800
