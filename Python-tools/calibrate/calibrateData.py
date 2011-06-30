@@ -165,12 +165,12 @@ def calibrate_1027C(Raw=[0x485484, 0x289F3D18, 0x7F7ABA66, 0x838C3082, 0x846E4B0
     Out.append(calibrateParoP(Raw[5],Coeffs=CP_SF,xFT=Raw[1]))
     return Out
     
-def calibrate_889E(Raw=[0x554E8A,0x2ABDD2BB,0x82907AA7,0x8125BB8A,0x7ECD98A3,0x838E5360,0x7ED87781]):
-    """Calibration for IODP 889E (has new name now) data.
+def calibrate_U1364A(Raw=[0x554E8A,0x2ABDD2BB,0x82907AA7,0x8125BB8A,0x7ECD98A3,0x838E5360,0x7ED87781]):
+    """Calibration for IODP U1364A data.
     
     Here are the results of an example calibration:
     
-    >>> calibrate_889E(Raw=[5590666, 717083323, 2190506663, 2166733706, 2127403171, 2207142752, 2128115585])
+    >>> calibrate_U1364A(Raw=[5590666, 717083323, 2190506663, 2166733706, 2127403171, 2207142752, 2128115585])
     [23.626078129440003, 22.276150361949441, 11.103497907947677, 10.510306334848947, 522.67979987438071, -517.29555399981541, 11.071455420816344]
     """
     RTC_ID=0x08
@@ -300,7 +300,7 @@ if __name__=='__main__':
     print calibrate_Endeavour83()
     print calibrate_HeissCalib()
     print calibrate_NT_C10_SmartPlug()
-    print calibrate_889E()
+    print calibrate_U1364A()
     print calibrate_DoNet2_OtherGauges()
     print calibrate_DoNet1()
     print calibratePPCTime().strftime('%Y-%m-%d %H:%M:%S')
