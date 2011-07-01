@@ -236,6 +236,17 @@ def calibrate_Barkley_BPR78(Raw=[0xB16C74, 0x2C4BFE29, 0x7AD37C04]):
     Out.append(calibrateParoP(Raw[2],Coeffs=CP_SF,Temp=5.578))
     return Out
 
+def calibrate_Folger_BPR201107(Raw=[0x4E3F81, 0x2AD287F0, 0x80A5E606]):
+    RTC_ID=0x05
+    Out=[]
+    CP_SF=getParoCoeffs(118200)
+    CT_Ti=getPlatinumCoeffs(0x99)
+    Out.append(calibratePlatinum(Raw[0],Coeffs=CT_Ti))
+    Out.append(calibrateParoT(Raw[1],Coeffs=CP_SF))
+    Out.append(calibrateParoP(Raw[2],Coeffs=CP_SF,xFT=Raw[1]))
+    Out.append(calibrateParoP(Raw[2],Coeffs=CP_SF,Temp=25.0))
+    return Out
+
 def calibrate_HeissCalib(Raw=[0x5DFB8B, 0x2946795B, 0x7F117EC8]):
     RTC_ID=0x58
     Out=[]
@@ -297,12 +308,13 @@ if __name__=='__main__':
     print calibrate_1027C()
     print calibrate_SR2A()
     print calibrate_SR2B()
-    print calibrate_Endeavour83()
+    print calibrate_Endeavour_BPR83()
     print calibrate_HeissCalib()
     print calibrate_NT_C10_SmartPlug()
     print calibrate_U1364A()
     print calibrate_DoNet2_OtherGauges()
     print calibrate_DoNet1()
+    print calibrate_Folger_BPR201107()
     print calibratePPCTime().strftime('%Y-%m-%d %H:%M:%S')
     
     import doctest
