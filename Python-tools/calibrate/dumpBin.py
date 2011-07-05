@@ -89,7 +89,7 @@ def getStatistics(Data, loggerID=None,do_plots=False):
         for i in range(0,len(Dts)):
             print '%3d --- %7d' % (Dts[i], len(np.where(idxs==i)[0]))
     except:
-	print 'Old vergsion of numpy, cannot do gap analysis...!'
+        print 'Old vergsion of numpy, cannot do gap analysis...!'
     
     # --- remove ID from internal temperatures ----     
     Ti=-2.95083e-006 * np.bitwise_and(vData['IDTemp'],0x00FFFFFF) + 40.0678
@@ -101,21 +101,23 @@ def getStatistics(Data, loggerID=None,do_plots=False):
         NFreqs[...,:,i]=Freqs[...,:,i]-np.median(Freqs[...,:,i])
         print np.median(Freqs[...,:,i])
     
-    # if do_plots:
-        # import matplotlib.pyplot as plt
-        # #print '%X' % Ti[0]
-        # ax1=plt.subplot(211)
-        # t=[datetime.datetime(1988,1,1)+datetime.timedelta(seconds=int(Secs)) for Secs in vData['Time']]
-        # #quit()
-        # plt.plot(vData['Time']-vData['Time'][0],Ti)
-        # #plt.plot(t,Ti,label='Ti')
-        # plt.ylabel('T int')
-        # plt.subplot(212, sharex=ax1)
-        # plt.plot(vData['Time']-vData['Time'][0],NFreqs-2206988218)
-        # #plt.plot(t,NFreqs-2206988218,label='Frequs')
-        # plt.legend()
-        # plt.show()
-    
+    if do_plots:
+        try:
+            import matplotlib.pyplot as plt
+            #print '%X' % Ti[0]
+            ax1=plt.subplot(211)
+            t=[datetime.datetime(1988,1,1)+datetime.timedelta(seconds=int(Secs)) for Secs in vData['Time']]
+            #quit()
+            plt.plot(vData['Time']-vData['Time'][0],Ti)
+            #plt.plot(t,Ti,label='Ti')
+            plt.ylabel('T int')
+            plt.subplot(212, sharex=ax1)
+            plt.plot(vData['Time']-vData['Time'][0],NFreqs-2206988218)
+            #plt.plot(t,NFreqs-2206988218,label='Frequs')
+            plt.legend()
+            plt.show()
+        except:
+            print 'Could not do plot, you probably have to install matplotlib!!!'
 def stripTrash(Data):
     loggerID=0x5c
     IdIdx=np.where(Data == loggerID)[0]
