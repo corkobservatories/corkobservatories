@@ -2,6 +2,9 @@
 from optparse import OptionParser
 import datetime
 import numpy as np
+import sys
+
+from calibrateData import calibratePPCTime
 
 
 def parseCMDOpts():
@@ -14,6 +17,10 @@ def parseCMDOpts():
               be processed by calibrateLogfile.py."""
     help_I="""Force RTC ID #. Supply id as hex integer (e.g. 0x8C). Default: 5th byte in file"""
     help_p="""Plots the data. May not work if you do not have the right libaries installed"""
+    help_i="""Just output statistics (and plot, optionally) and not the actual data"""
+    help_t="""Print calibrated timestamps on every line emulating NC logfiles, at the same time."""
+    help_f="""Modify timestamp format defaults is '%Y%m%d %H:%M:%S'.
+              Use -f '%Y%m%dT%H%M%S.000Z' to emulate NEPTUNE Canada log files. """
     
     parser=OptionParser(usage=usage, description=description, epilog=epilog)
     parser.add_option("-I","--RTC_ID",type="int",default=None,help=help_I)
@@ -22,7 +29,13 @@ def parseCMDOpts():
     parser.add_option("-a","--print_all",action="store_true",dest='printAll',default=False)
     parser.add_option("-p","--plot_data",action="store_true",dest='doPlots',default=False,\
                                                                                 help=help_p)
-    
+    parser.add_option("-i","--info_only",action="store_true",dest='info',default=False,help=help_i)
+    parser.add_option("-t","--timestamps",action="store_true",dest='writeTimestamp',default=False,\
+                                                                                            help=help_t)
+    parser.add_option("-f","--timestampFMT",type="string",dest='timestampFMT',\
+                                    default='%Y-%m-%d %H:%M:%S',help=help_f)
+    # '%Y%m%d %H:%M:%S'
+    # '%Y%m%dT%H%M%S.000Z' NC format
     return parser.parse_args()
     
 
@@ -74,7 +87,10 @@ def getStatistics(Data, loggerID=None,do_plots=False):
     vData.dtype=[('Time','>u4'),('IDTemp','>u4'),('Data','>u4',(1,NParo)),('Zeros','>u1')]
     #vData.dtype=[('rec',('date', np.int32,(1,7)),('Zeros',np.int8))]
     #vData.dtype=[('date', '>u1',(1,16)),('date2', '>u1',(1,1))]
-    print vData.shape
+    #print vData.shape
+    
+    print 'Time of first alinged reading: %s' % calibratePPCTime(vData['Time'][0]).strftime(options.timestampFMT) 
+    print 'Time of last  alinged reading: %s' % calibratePPCTime(vData['Time'][-1]).strftime(options.timestampFMT) 
     
     #print NParo*'%X ' % tuple(vData['Data'][1][0].tolist())
     #print '%d' % len(vData)
@@ -104,20 +120,32 @@ def getStatistics(Data, loggerID=None,do_plots=False):
     if do_plots:
         try:
             import matplotlib.pyplot as plt
+            from matplotlib.dates import AutoDateLocator, AutoDateFormatter
             #print '%X' % Ti[0]
             ax1=plt.subplot(211)
-            t=[datetime.datetime(1988,1,1)+datetime.timedelta(seconds=int(Secs)) for Secs in vData['Time']]
+            t=[calibratePPCTime(Secs) for Secs in vData['Time']]
             #quit()
-            plt.plot(vData['Time']-vData['Time'][0],Ti)
+            #plt.plot_date(t, Ti, fmt='bo',xdate=True,linestyle='-',marker='None')
+            #dateLoc=AutoDateLocator()
+            #ax1.xaxis.set_major_locator(dateLoc)
+            #ax1.xaxis.set_major_formatter(AutoDateFormatter(dateLoc))
+            plt.plot((vData['Time']-vData['Time'][0])/86400.0,Ti)
             #plt.plot(t,Ti,label='Ti')
             plt.ylabel('T int')
-            plt.subplot(212, sharex=ax1)
-            plt.plot(vData['Time']-vData['Time'][0],NFreqs-2206988218)
+            
+            plt.subplot(212, sharex=ax1) #
+            plt.plot((vData['Time']-vData['Time'][0])/86400.0,Freqs,label='Frequs')
+            #(Freqs+4294967296)*4.656612873e-9
+            #-2206988218
             #plt.plot(t,NFreqs-2206988218,label='Frequs')
-            plt.legend()
+            #plt.legend()
+            plt.xlabel('Days since %s' % t[0].strftime(options.timestampFMT))
             plt.show()
         except:
             print 'Could not do plot, you probably have to install matplotlib!!!'
+            print 'Error: ',  sys.exc_info()
+
+
 def stripTrash(Data):
     loggerID=0x5c
     IdIdx=np.where(Data == loggerID)[0]
@@ -133,6 +161,9 @@ if __name__=='__main__':
     
     getStatistics(Data,do_plots=options.doPlots)
     
+    if options.info:
+        # Don't return the actual data and quit right here
+        quit()
     
     
     print len(Data)
@@ -172,6 +203,11 @@ if __name__=='__main__':
             print "-> Time Problem"
         LastTime=CurrTime
         
+        if options.writeTimestamp:
+            sys.stdout.write('%s ' % calibratePPCTime(CurrTime).strftime(options.timestampFMT))
+            # '%Y%m%d %H:%M:%S'
+            # '%Y%m%dT%H%M%S.000Z' NC format
+            
         if not (dIdx == recLen):
             recordErrors += 1
             if options.printAll:
