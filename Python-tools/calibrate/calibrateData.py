@@ -91,6 +91,9 @@ def calibrateParoT(xFT,Coeffs=None):
     
     
     """
+    if xFT==0:
+        return np.nan;
+    
     C=Coeffs
     U=((xFT+4294967296)*4.656612873e-9/4)-C['U0']
     return C['Y1']*U+C['Y2']*np.power(U,2)
@@ -109,6 +112,9 @@ def calibratePlatinum(xT,Coeffs=None,ID=None):
     return C['a']*xT+C['b']
     
 def calibrateParoP(xFP,Coeffs=None,xFT=None, Temp=None):
+    if xFP==0:
+        return np.nan;
+    
     C=Coeffs
     isTypeI= C['U0']==0 # U0 is not zero for Type II probes
     
@@ -222,8 +228,8 @@ def calibrate_1027C(Raw=[0x5A6B14, 0x8318A3C2, 0x80EDC755]):
     """
     RTC_ID=0x89
     Out=[]
-    CP_SF=getParoCoeffs(120239)
-    CP_S1=getParoCoeffs(120238)
+    CP_SF=getParoCoeffs(120239) # 120239 (106096 old setup)
+    CP_S1=getParoCoeffs(120238) # 120238 (106095 old setup)
     CT_Ti=getPlatinumCoeffs(0x98)
     Out.append(calibratePlatinum(Raw[0],Coeffs=CT_Ti))
     Out.append(calibrateParoP(Raw[1],Coeffs=CP_S1,Temp=Out[0]))
@@ -322,8 +328,9 @@ def calibrate_DoNet2_OtherGauges(Raw=[0x5BB02E,0x2C2EE772,0x818520A1,0x817DEA2D,
 if __name__=='__main__':
 #    Coeffs=readParoCoeffs()
     print calibrate_1027C()
+    print calibrate_1027C([0,0,0])
     print calibrate_SR2A()
-    print calibrate_SR2B()
+    #print calibrate_SR2B()
     print calibrate_Endeavour_BPR83()
     print calibrate_HeissCalib()
     print calibrate_NT_C10_SmartPlug()
