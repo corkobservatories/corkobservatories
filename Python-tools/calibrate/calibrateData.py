@@ -197,7 +197,10 @@ def calibrate_U1364A(Raw=[0x554E8A,0x2ABDD2BB,0x82907AA7,0x8125BB8A,0x7ECD98A3,0
     Out.append(calibrateParoP(Raw[6],Coeffs=CP_SF,xFT=Raw[1]))
     return Out
 
-def calibrate_SR2A(Raw=[0x5A28E6, 0x80B536A8, 0x85201A2B, 0x7DF02102]):
+def calibrate_U1362A(Raw=[0x5A28E6, 0x80B536A8, 0x85201A2B, 0x7DF02102]):
+    """Calibration for the U1362A (SR2A) setup as it was in stalled on IODP Exp 327
+    in Jul 2010
+    """
     RTC_ID=0x76
     Out=[]
     CP_SF=getParoCoeffs(89098)
@@ -208,6 +211,44 @@ def calibrate_SR2A(Raw=[0x5A28E6, 0x80B536A8, 0x85201A2B, 0x7DF02102]):
     Out.append(calibrateParoP(Raw[1],Coeffs=CP_S1,Temp=Out[0]))
     Out.append(calibrateParoP(Raw[2],Coeffs=CP_S2,Temp=Out[0]))
     Out.append(calibrateParoP(Raw[3],Coeffs=CP_SF,Temp=Out[0]))
+    return Out
+
+def calibrate_U1362B_S1(Raw=[0x485484, 0x289F3D18, 0x7F7ABA66, 0x838C3082, 0x00000000, 0x7F501E6C]):
+    """Calibration for the U1362B (initially 1027C) setup as it was in stalled on IODP Exp 327
+    in Jul 2010. Scenario 1 that the probe was just unplugged S3 = 00000000.
+    """
+    RTC_ID=0x5C
+    Out=[]
+    CT_Ti=getPlatinumCoeffs(0x96)
+    CP_S1=getParoCoeffs(94000)
+    CP_S2=getParoCoeffs(94223)
+    #CP_S3=getParoCoeffs(106853)
+    CP_SF=getParoCoeffs(93976)
+    Out.append(calibratePlatinum(Raw[0],Coeffs=CT_Ti))
+    Out.append(calibrateParoT(Raw[1],Coeffs=CP_SF))
+    Out.append(calibrateParoP(Raw[2],Coeffs=CP_S1,Temp=Out[1]))
+    Out.append(calibrateParoP(Raw[3],Coeffs=CP_S2,Temp=Out[1]))
+    #Out.append(calibrateParoP(Raw[4],Coeffs=CP_S3,Temp=Out[1]))
+    Out.append(calibrateParoP(Raw[5],Coeffs=CP_SF,xFT=Raw[1]))
+    return Out
+
+def calibrate_U1362B_S2(Raw=[0x485484, 0x289F3D18, 0x7F7ABA66, 0x838C3082, 0x7F501E6C]):
+    """Calibration for the U1362B (initially 1027C) setup as it was in stalled on IODP Exp 327
+    in Jul 2010. Scenario 2 that the PPC was disabled S3 = missing.
+    """
+    RTC_ID=0x5C
+    Out=[]
+    CT_Ti=getPlatinumCoeffs(0x96)
+    CP_S1=getParoCoeffs(94000)
+    CP_S2=getParoCoeffs(94223)
+    #CP_S3=getParoCoeffs(106853)
+    CP_SF=getParoCoeffs(93976)
+    Out.append(calibratePlatinum(Raw[0],Coeffs=CT_Ti))
+    Out.append(calibrateParoT(Raw[1],Coeffs=CP_SF))
+    Out.append(calibrateParoP(Raw[2],Coeffs=CP_S1,Temp=Out[1]))
+    Out.append(calibrateParoP(Raw[3],Coeffs=CP_S2,Temp=Out[1]))
+    #Out.append(calibrateParoP(Raw[4],Coeffs=CP_S3,Temp=Out[1]))
+    Out.append(calibrateParoP(Raw[4],Coeffs=CP_SF,xFT=Raw[1]))
     return Out
 
 # ## This setup with new gauges (see below ended up at 1027C Jul2010
@@ -329,12 +370,12 @@ if __name__=='__main__':
 #    Coeffs=readParoCoeffs()
     print calibrate_1027C()
     print calibrate_1027C([0,0,0])
-    print calibrate_SR2A()
+    print calibrate_U1362A()
     #print calibrate_SR2B()
     print calibrate_Endeavour_BPR83()
     print calibrate_HeissCalib()
     print calibrate_NT_C10_SmartPlug()
-    print calibrate_U1364A()
+    print calibrate_U1364A() # @ ODP 889
     print calibrate_DoNet2_OtherGauges()
     print calibrate_DoNet1()
     print calibrate_Folger_BPR201107()
