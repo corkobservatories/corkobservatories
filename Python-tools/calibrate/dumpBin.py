@@ -16,6 +16,7 @@ def parseCMDOpts():
     help_n="""Put no spaces between fields in dump. This is the default so that the output can
               be processed by calibrateLogfile.py."""
     help_I="""Force RTC ID #. Supply id as hex integer (e.g. 0x8C). Default: 5th byte in file"""
+    help_d="""Remove detected spikes by inserting linear interpolation."""
     help_p="""Plots the data. May not work if you do not have the right libaries installed"""
     help_i="""Just output statistics (and plot, optionally) and not the actual data"""
     help_t="""Print calibrated timestamps on every line emulating NC logfiles, at the same time."""
@@ -34,6 +35,8 @@ def parseCMDOpts():
                                                                                             help=help_t)
     parser.add_option("-f","--timestampFMT",type="string",dest='timestampFMT',\
                                     default='%Y-%m-%d %H:%M:%S',help=help_f)
+    parser.add_option("-d","--despike",action="store_true",dest='interpSpikes', default=False,help=help_d)
+    
     # '%Y%m%d %H:%M:%S'
     # '%Y%m%dT%H%M%S.000Z' NC format
     return parser.parse_args()
@@ -60,7 +63,7 @@ def recordLength(Data, loggerID=None):
     recLen=int(np.round(np.median(np.diff(IdIdx))))    
     return recLen
         
-def getStatistics(Data, loggerID=None,do_plots=False):
+def getStatistics(Data, loggerID=None,do_plots=False,interp_spikes=False):
     if not loggerID:
         loggerID=Data[4]
     
@@ -96,6 +99,7 @@ def getStatistics(Data, loggerID=None,do_plots=False):
     #print '%d' % len(vData)
     
     NZeros=len(np.where(vData['Data']==0)[0])
+    
     print "%d (%f %%) Paro readings are zero" % (NZeros, 100*NZeros/(NRecs*NParo))
     
     Dt=np.diff(vData['Time'])
@@ -110,6 +114,44 @@ def getStatistics(Data, loggerID=None,do_plots=False):
     # --- remove ID from internal temperatures ----     
     Ti=-2.95083e-006 * np.bitwise_and(vData['IDTemp'],0x00FFFFFF) + 40.0678
     Freqs=vData['Data'].reshape((NRecs,-1))
+    
+    # Create sample spikes
+    #Freqs[1][0]=0
+    #Freqs[2][0]=0
+    #Freqs[3][0]=0
+    #Freqs[1][4]=0
+    
+    print Freqs.shape
+    print Freqs
+    for SensNo in range(Freqs.shape[1]):
+        print '=== Sensor %d ===' % SensNo
+        i=1
+        spikeDetect=np.where(np.abs(np.diff(Freqs[0:,SensNo]/1e9,axis=0))>0.01)
+        # print spikeDetect
+        while i< len(spikeDetect[0]):
+            if (spikeDetect[0][i]-spikeDetect[0][i-1])<=3: 
+                # Spike can be three samples long, at most...
+                if Freqs[spikeDetect[0][i]][SensNo] == 0:
+                    print 'Zero spike!'
+                else:
+                    print 'Spike!!!'
+                    # Has to be loop!!! spikeDetect[0][i-1]+1:spikeDetect[0][i]
+                    # Freqs[spikeDetect[0][i-1]+1][SensNo]=0
+                spikeStart=spikeDetect[0][i-1]+1
+                spikeEnd=spikeDetect[0][i]
+                spikeRange=range(spikeStart,spikeEnd+1)
+                spikeFill=np.interp(spikeRange,[spikeStart-1, spikeEnd+1],[Freqs[spikeStart-1,SensNo],Freqs[spikeEnd+1,SensNo]])
+                print spikeRange, spikeFill
+                if interp_spikes:
+                    Freqs[spikeRange,SensNo]=spikeFill
+                i+=2
+            else:
+                # No spike
+                print 'No Spike...'
+                i+=1
+    #print np.float(Freqs)    
+    spikes=np.where(np.abs(np.diff(Freqs/1e9,axis=0))>0.01)
+    
     NFreqs=Freqs.copy()
     print NFreqs[0:5]
     print NFreqs.shape
@@ -122,24 +164,34 @@ def getStatistics(Data, loggerID=None,do_plots=False):
             import matplotlib.pyplot as plt
             from matplotlib.dates import AutoDateLocator, AutoDateFormatter
             #print '%X' % Ti[0]
-            ax1=plt.subplot(211)
+            ax1=plt.subplot(311)
             t=[calibratePPCTime(Secs) for Secs in vData['Time']]
+            td=(vData['Time']-vData['Time'][0])/86400.0
             #quit()
             #plt.plot_date(t, Ti, fmt='bo',xdate=True,linestyle='-',marker='None')
             #dateLoc=AutoDateLocator()
             #ax1.xaxis.set_major_locator(dateLoc)
             #ax1.xaxis.set_major_formatter(AutoDateFormatter(dateLoc))
-            plt.plot((vData['Time']-vData['Time'][0])/86400.0,Ti)
+            plt.plot(td,Ti)
             #plt.plot(t,Ti,label='Ti')
             plt.ylabel('T int')
             
-            plt.subplot(212, sharex=ax1) #
-            plt.plot((vData['Time']-vData['Time'][0])/86400.0,Freqs,label='Frequs')
+            plt.subplot(312, sharex=ax1)
+            plt.plot(td,Freqs,label=' ')
+            plt.legend()
+            #plt.plot(td,np.abs(np.diff(Freqs/1e9,axis=0)),label='Fre')
             #(Freqs+4294967296)*4.656612873e-9
             #-2206988218
             #plt.plot(t,NFreqs-2206988218,label='Frequs')
-            #plt.legend()
+            
+            plt.subplot(313, sharex=ax1) #
+            #plt.plot(td[1:],np.abs(np.diff(Freqs/1e9,axis=0)))
+            plt.plot(td[spikes[0]],spikes[1]+1,'*',label='spike')
+            plt.plot(td[spikes[0]],spikes[1]+1,'+',label='zero')
+            plt.grid('on')
+            plt.ylabel('Freq channel')
             plt.xlabel('Days since %s' % t[0].strftime(options.timestampFMT))
+            plt.legend()
             plt.show()
         except:
             print 'Could not do plot, you probably have to install matplotlib!!!'
@@ -159,7 +211,7 @@ if __name__=='__main__':
     else:
         Data=readBinFile()
     
-    getStatistics(Data,do_plots=options.doPlots)
+    getStatistics(Data,do_plots=options.doPlots,interp_spikes=options.interpSpikes)
     
     if options.info:
         # Don't return the actual data and quit right here
