@@ -9,7 +9,7 @@ import numpy as np
 import datetime
 
 import sys, os
-ConfigPath = os.path.abspath(os.path.dirname(__file__))
+ConfigPath = os.path.join(os.path.abspath(os.path.dirname(__file__)),'CalibrationFiles')
 if not os.path.isdir(ConfigPath):
     ConfigPath = os.getcwd()
 
