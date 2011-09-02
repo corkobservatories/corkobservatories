@@ -8,7 +8,7 @@
 SamplePeriod  15
 
 # Delay until temperature measurement in milliseconds (fixed).
-# ThermometerWait  500
+# ThermometerWait  200
 
 # Mode selected sample period (user editable).
 # Enter 'A' for autonomous, 'C' for cabled, '1' for 1 Hz.
@@ -25,16 +25,16 @@ PPCDataXmitTime  F9
 NumChannels  1
 
 # Start time (fixed). Use Synchronize Clock option in mlterm.
-# StartTime  2009/04/14 19:21:22
+# StartTime  2011/09/02 00:44:09
 
 # RTC Rate Tweak (REALLY fixed).
-# RTCRateTweak  C3
+# RTCRateTweak  D0
 
 # RTC Identifier (REALLY fixed).
-# RTCIdent  85
+# RTCIdent  8B
 
 # 64bytes:1234567890123456789012345678901234567890123456789012345678901234
-MetaData  BPR 1027-NE sample(bytes):time(4)id(1)temp(3)pressure(4)delim0(1)
+MetaData  BPR 1027NE sample(bytes):time(4)id(1)temp(3)pressure(4)delim0(1)
 
 
 [PPC9]
@@ -52,7 +52,7 @@ PressureIntegrationTime  800
 MaxSensorSteadyCurrent  10.1
 
 # PPC Calibration Coefficients (REALLY fixed).
-# CalibrationCoefficients  E9B01758E9D60878
+# CalibrationCoefficients  E96B1787E9AB0886
 
 # 64bytes:1234567890123456789012345678901234567890123456789012345678901234
 MetaData  SN(ver): T86 P106857 MT01C01-408(544) 2008R8B(rtc8e ppc8c)
