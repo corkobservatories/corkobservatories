@@ -16,46 +16,70 @@ ModeSelectedPeriod  C
 
 # Delay until time stamp is sent to MT01 (edits not recommended!).
 RTCTimeStampDelay  F380
+# WARNING: Entry must be between F000 and F04D for xxx-2 type paroscientific gauges
 
 # Time to transmit 4 bytes of data from PPC (edits not recommended!).
 PPCDataXmitTime  F9
+# WARNING: F5 is the only valid entry for pressure sensors with temperature period
 
 # Number of PPC channels (user editable).
 # Maximum is 7.
-NumChannels  1
+NumChannels  2
 
 # Start time (fixed). Use Synchronize Clock option in mlterm.
-# StartTime  2009/04/14 19:21:22
+# StartTime  2011/09/02 00:31:12
 
 # RTC Rate Tweak (REALLY fixed).
-# RTCRateTweak  C3
+# RTCRateTweak  A0
 
 # RTC Identifier (REALLY fixed).
-# RTCIdent  85
+# RTCIdent  83
 
 # 64bytes:1234567890123456789012345678901234567890123456789012345678901234
-MetaData  BPR NCEN sample(bytes):time(4)id(1)temp(3)pressure(4)delim0(1)
+MetaData  BPR RCMS sample(bytes):time(4)id(1)temp(3)temppres(8)delim0(1)
 
 
-[PPC9]
+[PPC*]
 
 # Paroscientific gauge warmup in milliseconds (edits not recommended)
 SensorWarmupTime  370
 
-# Enter 0 ms for Paro-1 gauges with no temperature measurement (edits not recommended)
-TempIntegrationTime  0
-
-# in milliseconds (edits not recommended)
-PressureIntegrationTime  800
-
 # in mA (edits not recommended)
 MaxSensorSteadyCurrent  10.1
 
+
+[PPC9]
+
+# Enter 0 ms for Paro-1 gauges with no temperature measurement (edits not recommended)
+TempIntegrationTime  810
+# WARNING: Only valid values are 0 for paro-1 type gauge and 400 for paro-2 gauge
+
+# in milliseconds (edits not recommended)
+PressureIntegrationTime  0
+# WARNING: Only valid value is 800
+
 # PPC Calibration Coefficients (REALLY fixed).
-# CalibrationCoefficients  E9B01758E9D60878
+# CalibrationCoefficients  E9711792E98A0899
 
 # 64bytes:1234567890123456789012345678901234567890123456789012345678901234
-MetaData  SN(ver): T9C P107561 MT01C01-491(???) 2010R06(rtc8e ppc8c)
+MetaData  SN(ver): T87 TP120236 MT01C01-406(544) 2008R83(rtc8e ppc9a) temp
+
+
+[PPC1]
+
+# Enter 0 ms for Paro-1 gauges with no temperature measurement (edits not recommended)
+TempIntegrationTime  0
+# WARNING: Value differs from that of PPC 9
+
+# in milliseconds (edits not recommended)
+PressureIntegrationTime  800
+# WARNING: Value differs from that of PPC 9
+
+# PPC Calibration Coefficients (REALLY fixed).
+# CalibrationCoefficients  E8C31925E71E099D
+
+# 64bytes:1234567890123456789012345678901234567890123456789012345678901234
+MetaData  2005S09(8c) pressure.  2ppcs for paro-2 temp and pressure at 1Hz
 
 
 [MT01]
