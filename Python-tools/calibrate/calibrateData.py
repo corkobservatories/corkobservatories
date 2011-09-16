@@ -287,6 +287,24 @@ def calibrate_Endeavour_BPR83(Raw=[0x62C101, 0x2A3FFD76, 0x80DC9B7D]):
     Out.append(calibrateParoP(Raw[2],Coeffs=CP_SF,xFT=Raw[1]))
     return Out
 
+def calibrate_NCHR_BPR8C(Raw=[0x4B0A8B, 0x846C7A3D]):
+    RTC_ID=0x8C
+    Out=[]
+    CP_SF=getParoCoeffs(106853)
+    CT_Ti=getPlatinumCoeffs(0x9F)
+    Out.append(calibratePlatinum(Raw[0],Coeffs=CT_Ti))
+    Out.append(calibrateParoP(Raw[1],Coeffs=CP_SF,Temp=Out[0]))
+    return Out
+
+def calibrate_KEMO_BPR06(Raw=[0x50675D, 0x80C83032]):
+    RTC_ID=0x06
+    Out=[]
+    CP_SF=getParoCoeffs(120655)
+    CT_Ti=getPlatinumCoeffs(0x9C)
+    Out.append(calibratePlatinum(Raw[0],Coeffs=CT_Ti))
+    Out.append(calibrateParoP(Raw[1],Coeffs=CP_SF,Temp=Out[0]))
+    return Out
+
 def calibrate_Barkley_BPR78(Raw=[0xB16C74, 0x2C4BFE29, 0x7AD37C04]):
     RTC_ID=0x78
     Out=[]
