@@ -41,7 +41,9 @@ if __name__=='__main__':
     
     for line in f:
         try:
-            hexBlock=re.search(r'[\dA-Fa-f]+',line)
+            # Minimum sample with time, id, Tint, 1 Paros, and 00 has 26 characters
+            hexBlock=re.search(r'[\dA-Fa-f]{26,}',line)
+            #print hexBlock.group(0)
             x=re.findall(r'[\dA-Fa-f]{8}',hexBlock.group(0))
             x[1]=x[1][2:]
             t=calibratePPCTime(int(x[0],16)).strftime('%Y-%m-%d %H:%M:%S')
