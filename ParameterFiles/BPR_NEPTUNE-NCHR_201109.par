@@ -8,14 +8,15 @@
 SamplePeriod  15
 
 # Delay until temperature measurement in milliseconds (fixed).
-# ThermometerWait  500
+# ThermometerWait  200
 
 # Mode selected sample period (user editable).
 # Enter 'A' for autonomous, 'C' for cabled, '1' for 1 Hz.
 ModeSelectedPeriod  C
 
 # Delay until time stamp is sent to MT01 (edits not recommended!).
-RTCTimeStampDelay  F380
+RTCTimeStampDelay  F41F
+# WARNING: F380 or F381 are the only valid entries for xxx-1 type paroscientific gauges
 
 # Time to transmit 4 bytes of data from PPC (edits not recommended!).
 PPCDataXmitTime  F9
@@ -25,13 +26,13 @@ PPCDataXmitTime  F9
 NumChannels  1
 
 # Start time (fixed). Use Synchronize Clock option in mlterm.
-# StartTime  2009/04/14 19:21:22
+# StartTime  2011/09/13 20:25:49
 
 # RTC Rate Tweak (REALLY fixed).
-# RTCRateTweak  C3
+# RTCRateTweak  8E
 
 # RTC Identifier (REALLY fixed).
-# RTCIdent  85
+# RTCIdent  8C
 
 # 64bytes:1234567890123456789012345678901234567890123456789012345678901234
 MetaData  BPR NCHR sample(bytes):time(4)id(1)temp(3)pressure(4)delim0(1)
@@ -52,10 +53,10 @@ PressureIntegrationTime  800
 MaxSensorSteadyCurrent  10.1
 
 # PPC Calibration Coefficients (REALLY fixed).
-# CalibrationCoefficients  E9B01758E9D60878
+# CalibrationCoefficients  E9A31774E9A6088F
 
 # 64bytes:1234567890123456789012345678901234567890123456789012345678901234
-MetaData  SN(ver): T9F P106857 MT01C01-492(???) 2008R8C(rtc8e ppc8c)
+MetaData  SN(ver): T9F P106853 MT01C01-492(d9dabf) 2008R8C(rtc8e ppc8c)
 
 
 [MT01]
@@ -94,4 +95,5 @@ LstnMode  ASC
 # LowVolt  4960
 
 # OK Voltage (fixed)
-# OkVolt  6800
+# OkVolt  6960
+# WARNING: OK Voltage should be 6800.

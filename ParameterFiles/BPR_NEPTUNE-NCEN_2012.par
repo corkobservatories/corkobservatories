@@ -55,8 +55,9 @@ MaxSensorSteadyCurrent  10.1
 # CalibrationCoefficients  E9B01758E9D60878
 
 # 64bytes:1234567890123456789012345678901234567890123456789012345678901234
-MetaData  SN(ver): T9C P107561 MT01C01-491(???) 2010R06(rtc8e ppc8c)
-
+# MetaData  SN(ver): T9C P107561 MT01C01-491(???) 2010R06(rtc8e ppc8c)
+# Planned setup for 2012
+MetaData  SN(ver): T9B P107561 MT01C01-490(d9dabf) 2008R80(rtc8e ppc8c)
 
 [MT01]
 
