@@ -325,7 +325,7 @@ def calibrate_Folger_BPR201107(Raw=[0x4E3F81, 0x2AD287F0, 0x80A5E606]):
     Out.append(calibratePlatinum(Raw[0],Coeffs=CT_Ti))
     Out.append(calibrateParoT(Raw[1],Coeffs=CP_SF))
     Out.append(calibrateParoP(Raw[2],Coeffs=CP_SF,xFT=Raw[1]))
-    Out.append(calibrateParoP(Raw[2],Coeffs=CP_SF,Temp=25.0))
+    #Out.append(calibrateParoP(Raw[2],Coeffs=CP_SF,Temp=25.0))
     return Out
 
 def calibrate_HeissCalib(Raw=[0x5DFB8B, 0x2946795B, 0x7F117EC8]):
