@@ -25,7 +25,7 @@ PPCDataXmitTime  F9
 NumChannels  1
 
 # Start time (fixed). Use Synchronize Clock option in mlterm.
-# StartTime  2011/09/02 00:44:09
+# StartTime  2011/09/17 03:07:16
 
 # RTC Rate Tweak (REALLY fixed).
 # RTCRateTweak  D0

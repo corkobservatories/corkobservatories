@@ -27,13 +27,13 @@ PPCDataXmitTime  F9
 NumChannels  2
 
 # Start time (fixed). Use Synchronize Clock option in mlterm.
-# StartTime  2011/09/02 00:31:12
+# StartTime  2011/09/16 01:51:32
 
 # RTC Rate Tweak (REALLY fixed).
-# RTCRateTweak  A0
+# RTCRateTweak  33
 
 # RTC Identifier (REALLY fixed).
-# RTCIdent  83
+# RTCIdent  94
 
 # 64bytes:1234567890123456789012345678901234567890123456789012345678901234
 MetaData  BPR RCMS sample(bytes):time(4)id(1)temp(3)temppres(8)delim0(1)
