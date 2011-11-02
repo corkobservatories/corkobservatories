@@ -213,59 +213,28 @@ def calibrate_U1362A(Raw=[0x5A28E6, 0x80B536A8, 0x85201A2B, 0x7DF02102]):
     Out.append(calibrateParoP(Raw[3],Coeffs=CP_SF,Temp=Out[0]))
     return Out
 
-def calibrate_U1362B_S1(Raw=[0x485484, 0x289F3D18, 0x7F7ABA66, 0x838C3082, 0x00000000, 0x7F501E6C]):
+def calibrate_U1362B(Raw=[0x485484, 0x289F3D18, 0x7F7ABA66, 0x838C3082, 0x00000000, 0x7F501E6C]):
     """Calibration for the U1362B (initially 1027C) setup as it was in stalled on IODP Exp 327
-    in Jul 2010. Scenario 1 that the probe was just unplugged S3 = 00000000.
+    in Jul 2010. The Screen #3 gauge was just unplugged => crosstalk garbage.
     """
     RTC_ID=0x5C
     Out=[]
     CT_Ti=getPlatinumCoeffs(0x96)
     CP_S1=getParoCoeffs(94000)
     CP_S2=getParoCoeffs(94223)
-    #CP_S3=getParoCoeffs(106853)
+    #CP_S3=   **Disconnected**
     CP_SF=getParoCoeffs(93976)
     Out.append(calibratePlatinum(Raw[0],Coeffs=CT_Ti))
     Out.append(calibrateParoT(Raw[1],Coeffs=CP_SF))
     Out.append(calibrateParoP(Raw[2],Coeffs=CP_S1,Temp=Out[1]))
     Out.append(calibrateParoP(Raw[3],Coeffs=CP_S2,Temp=Out[1]))
-    #Out.append(calibrateParoP(Raw[4],Coeffs=CP_S3,Temp=Out[1]))
+    #Out.append(calibrateParoP(Raw[4],Coeffs=CP_S3,Temp=Out[1])) ** Skip this
     Out.append(calibrateParoP(Raw[5],Coeffs=CP_SF,xFT=Raw[1]))
     return Out
 
-def calibrate_U1362B_S2(Raw=[0x485484, 0x289F3D18, 0x7F7ABA66, 0x838C3082, 0x7F501E6C]):
-    """Calibration for the U1362B (initially 1027C) setup as it was in stalled on IODP Exp 327
-    in Jul 2010. Scenario 2 that the PPC was disabled S3 = missing.
-    """
-    RTC_ID=0x5C
-    Out=[]
-    CT_Ti=getPlatinumCoeffs(0x96)
-    CP_S1=getParoCoeffs(94000)
-    CP_S2=getParoCoeffs(94223)
-    #CP_S3=getParoCoeffs(106853)
-    CP_SF=getParoCoeffs(93976)
-    Out.append(calibratePlatinum(Raw[0],Coeffs=CT_Ti))
-    Out.append(calibrateParoT(Raw[1],Coeffs=CP_SF))
-    Out.append(calibrateParoP(Raw[2],Coeffs=CP_S1,Temp=Out[1]))
-    Out.append(calibrateParoP(Raw[3],Coeffs=CP_S2,Temp=Out[1]))
-    #Out.append(calibrateParoP(Raw[4],Coeffs=CP_S3,Temp=Out[1]))
-    Out.append(calibrateParoP(Raw[4],Coeffs=CP_SF,xFT=Raw[1]))
-    return Out
-
-# ## This setup with new gauges (see below ended up at 1027C Jul2010
-# def calibrate_SR2B(Raw=[0x5A6B14, 0x8318A3C2, 0x80EDC755]):
-    # RTC_ID=0x89
-    # Out=[]
-    # CP_SF=getParoCoeffs(106096)
-    # CP_S1=getParoCoeffs(106095)
-    # CT_Ti=getPlatinumCoeffs(0x98)
-    # Out.append(calibratePlatinum(Raw[0],Coeffs=CT_Ti))
-    # Out.append(calibrateParoP(Raw[1],Coeffs=CP_S1,Temp=Out[0]))
-    # Out.append(calibrateParoP(Raw[2],Coeffs=CP_SF,Temp=Out[0]))
-    # return Out
-
 def calibrate_1027C(Raw=[0x5A6B14, 0x8318A3C2, 0x80EDC755]):
-    """Calibration for the 1027C setup as it was in stalled on IODP Exp 327
-    in Jul 2010
+    """Calibration for the setup (SR-2B with new gauges) 
+    deployed external to CORK in 1027C in Summer 2011, attached with umbilical
     """
     RTC_ID=0x89
     Out=[]
