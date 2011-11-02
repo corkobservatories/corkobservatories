@@ -13,8 +13,7 @@ def parseCMDOpts():
     description="""This script processes ML-CORK bin files"""
     epilog="""Examples:"""
     
-    help_n="""Put no spaces between fields in dump. This is the default so that the output can
-              be processed by calibrateLogfile.py."""
+    help_n="""Skip stats--they can take some time and generate some clutter"""
     help_I="""Force RTC ID #. Supply id as hex integer (e.g. 0x8C). Default: 5th byte in file"""
     help_d="""Remove detected spikes by inserting linear interpolation."""
     help_p="""Plots the data. May not work if you do not have the right libaries installed"""
@@ -22,10 +21,11 @@ def parseCMDOpts():
     help_t="""Print calibrated timestamps on every line emulating NC logfiles, at the same time."""
     help_f="""Modify timestamp format defaults is '%Y%m%d %H:%M:%S'.
               Use -f '%Y%m%dT%H%M%S.000Z' to emulate NEPTUNE Canada log files. """
+    help_b="""Safe a binary file skipping problematic records"""
     
     parser=OptionParser(usage=usage, description=description, epilog=epilog)
     parser.add_option("-I","--RTC_ID",type="int",default=None,help=help_I)
-    parser.add_option("-n","--no_spaces",action="store_false",dest='spaces',help=help_n)
+    parser.add_option("-n","--no_stats",action="store_false",dest='statistics',default=True,help=help_n)
     parser.add_option("-s","--spaces",action="store_true",dest='spaces',default=False)
     parser.add_option("-a","--print_all",action="store_true",dest='printAll',default=False)
     parser.add_option("-p","--plot_data",action="store_true",dest='doPlots',default=False,\
@@ -36,6 +36,7 @@ def parseCMDOpts():
     parser.add_option("-f","--timestampFMT",type="string",dest='timestampFMT',\
                                     default='%Y-%m-%d %H:%M:%S',help=help_f)
     parser.add_option("-d","--despike",action="store_true",dest='interpSpikes', default=False,help=help_d)
+    parser.add_option("-b","--binary_file",type="string",default=None,dest='binaryFile',help=help_b)
     
     # '%Y%m%d %H:%M:%S'
     # '%Y%m%dT%H%M%S.000Z' NC format
@@ -211,14 +212,18 @@ if __name__=='__main__':
     else:
         Data=readBinFile()
     
-    getStatistics(Data,do_plots=options.doPlots,interp_spikes=options.interpSpikes)
+    if options.statistics:
+        getStatistics(Data,do_plots=options.doPlots,interp_spikes=options.interpSpikes)
     
     if options.info:
         # Don't return the actual data and quit right here
         quit()
     
+    if options.binaryFile:
+        binFile=open(options.binaryFile,'wb')
     
-    print len(Data)
+    NBytes=len(Data)
+    print NBytes
     print type(Data)
     np.set_printoptions(threshold=10000)
     
@@ -241,15 +246,25 @@ if __name__=='__main__':
 #    quit()
 
     IdIdx=np.where(Data == loggerID)[0]
-    IdxGood=np.where(np.logical_and(((Data[IdIdx[0:-2]]-Data[IdIdx[0:-2]+recLen]) == 0), (Data[IdIdx[0:-2]+recLen-5]==0)))[0]
+    
+    # Patch the data with a few records of logger IDs at the to simplify consistency checking
+    Data=np.concatenate((Data,loggerID*np.ones(3*recLen, dtype=Data.dtype)),axis=1)
+    #IdxGood=np.where(np.logical_and(((Data[IdIdx[0:-2]]-Data[IdIdx[0:-2]+recLen]) == 0), (Data[IdIdx[0:-2]+recLen-5]==0)))[0]
+    IdxGood=np.where(np.logical_and(((Data[IdIdx]-Data[IdIdx+recLen]) == 0), (Data[IdIdx+recLen-5]==0)))[0]
+    #IdxGood=np.where(Data[IdIdx[0:-2]+recLen-5]==0)[0]
     IdIdx=IdIdx[IdxGood]-4
-    lastIdx=0
+    lastIdx=-recLen
     recordErrors=0
+    goodRecords=0
     LastTime=0
+    print IdIdx.flat[0]
+    print len(IdIdx.flat)
     for idx in IdIdx.flat:
         dIdx=(idx-lastIdx)
         if dIdx < recLen:
+            # assuming match by accident
             continue
+            
         CurrTime=int(4*'%02x' % tuple(Data[idx:idx+4].tolist()),16)
         if CurrTime < LastTime:
             print "-> Time Problem"
@@ -264,8 +279,17 @@ if __name__=='__main__':
             recordErrors += 1
             if options.printAll:
                 print '=================== %d =======================' % dIdx
-                print dIdx*'%02x' % tuple(Data[lastIdx:idx].tolist())
+                if not options.writeTimestamp:
+                    print calibratePPCTime(CurrTime).strftime(options.timestampFMT)
+          
+                if lastIdx<0:
+                    # Required if the bin file starts with garbage
+                    lastIdx=0
+                
+                garbage=tuple(Data[lastIdx:idx].tolist())
+                print len(garbage)*'%02x' % garbage
                 print '--------------------------------------------'
+                
         if not options.spaces:
             print (((recLen)/4*'%02X%02X%02X%02X')+'%02X') \
                        % tuple(Data[idx:idx+recLen].tolist())
@@ -273,8 +297,25 @@ if __name__=='__main__':
             print ( '%02X%02X%02X%02X %02X %02X%02X%02X '+  \
                    ((recLen-8)/4*'%02X%02X%02X%02X ')+'%02X') \
                      % tuple(Data[idx:idx+recLen].tolist())
+        if options.binaryFile:
+            #Data[idx:idx+recLen].tofile(binFile)
+            binFile.write(Data[idx:idx+recLen].tostring(order=None))
+        goodRecords += 1
+        if goodRecords == 1:
+            firstTime=CurrTime
+            
         lastIdx=idx
+    
+    print "Possible Records: %.1f" % (NBytes/float(recLen))
+    print "Good Records:     %d   (%s -> %s)" % (goodRecords,
+                        calibratePPCTime(firstTime).strftime(options.timestampFMT),
+                        calibratePPCTime(CurrTime).strftime(options.timestampFMT))
+    
+    print "%d unused bytes (%.1f records) at the end" % (NBytes-(lastIdx+recLen), (NBytes-(lastIdx+recLen))/float(recLen))
     print "Record errors: %d" % recordErrors
+    
+    if options.binaryFile:
+        binFile.close()
     
 # Change type of an array        
 #    b.dtype=np.dtype([('a',np.int16),('b',np.int16),('c',np.int32)])
