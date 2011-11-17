@@ -13,6 +13,7 @@ def parseCMDOpts():
     description="""This script processes ML-CORK bin files"""
     epilog="""Examples:"""
     
+    help_c="""Force number of paro channels"""
     help_n="""Skip stats--they can take some time and generate some clutter"""
     help_I="""Force RTC ID #. Supply id as hex integer (e.g. 0x8C). Default: 5th byte in file"""
     help_d="""Remove detected spikes by inserting linear interpolation."""
@@ -25,6 +26,7 @@ def parseCMDOpts():
     
     parser=OptionParser(usage=usage, description=description, epilog=epilog)
     parser.add_option("-I","--RTC_ID",type="int",default=None,help=help_I)
+    parser.add_option("-c","--n_channels",type="int",dest='nchannels',default=None,help=help_c)
     parser.add_option("-n","--no_stats",action="store_false",dest='statistics',default=True,help=help_n)
     parser.add_option("-s","--spaces",action="store_true",dest='spaces',default=False)
     parser.add_option("-a","--print_all",action="store_true",dest='printAll',default=False)
@@ -231,7 +233,10 @@ if __name__=='__main__':
     if not loggerID:
         loggerID=Data[4]
         
-    recLen=recordLength(Data,loggerID=loggerID)
+    if not options.nchannels:    
+        recLen=recordLength(Data,loggerID=loggerID)
+    else:
+        recLen=8+4*options.nchannels+1
     
     print recLen
 #    recType=np.dtype([('t',np.uint32),('ID_Ti',np.uint32),('Freqs',(np.uint32,(1,(recLen-9)/4))),('trailer',np.uint8)]);
