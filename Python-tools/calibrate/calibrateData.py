@@ -246,6 +246,20 @@ def calibrate_1027C(Raw=[0x5A6B14, 0x8318A3C2, 0x80EDC755]):
     Out.append(calibrateParoP(Raw[2],Coeffs=CP_SF,Temp=Out[0]))
     return Out
 
+def calibrate_857D(Raw=[0x456366, 0x816EB860, 0x82121169]):
+    """Calibration for the 857D Middle Valley piggyback instrument
+    """
+    RTC_ID=0x81
+    Out=[]
+    CP_SF=getParoCoeffs(107555)
+    CP_S1=getParoCoeffs(106393)
+    CT_Ti=getPlatinumCoeffs(0x8C)
+    Out.append(calibratePlatinum(Raw[0],Coeffs=CT_Ti))
+    Out.append(calibrateParoP(Raw[1],Coeffs=CP_S1,Temp=Out[0]))
+    Out.append(calibrateParoP(Raw[2],Coeffs=CP_SF,Temp=Out[0]))
+    return Out
+
+
 def calibrate_Endeavour_BPR83(Raw=[0x62C101, 0x2A3FFD76, 0x80DC9B7D]):
     RTC_ID=0x83
     Out=[]
