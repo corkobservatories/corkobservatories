@@ -5,7 +5,7 @@
 
 # Sample period in seconds (user editable).
 # Sample period must evenly divide 60 (subminute) or 3600 (subhourly).
-SamplePeriod  10
+SamplePeriod  600
 
 # Delay until temperature measurement in milliseconds (fixed).
 # ThermometerWait  200
@@ -16,18 +16,16 @@ ModeSelectedPeriod  A
 
 # Delay until time stamp is sent to MT01 (edits not recommended!).
 RTCTimeStampDelay  F000
-# WARNING: F380 or F381 are the only valid entries for xxx-1 type paroscientific gauges
 
 # Time to transmit 4 bytes of data from PPC (edits not recommended!).
 PPCDataXmitTime  F5
-# WARNING: F9 is the only valid entry for pressure sensors without temperature period
 
 # Number of PPC channels (user editable).
 # Maximum is 7.
 NumChannels  3
 
 # Start time (fixed). Use Synchronize Clock option in mlterm.
-# StartTime  2012/01/27 19:48:30
+# StartTime  2012/02/24 19:38:38
 
 # RTC Rate Tweak (REALLY fixed).
 # RTCRateTweak  9F
@@ -60,7 +58,7 @@ MaxSensorSteadyCurrent  10.1
 # CalibrationCoefficients  E889180EE91A08C2
 
 # 64bytes:1234567890123456789012345678901234567890123456789012345678901234
-MetaData  RTC(8e)/PPC(8c) 2011R04 Paro-II T/P 119099 Gauge #1 
+MetaData  RTC(8e)/PPC(8c) 2011R04 Paro-II T/P 119099 Gauge #1
 
 
 [PPC1]
@@ -90,7 +88,7 @@ MetaData  dPPC(8c/8c) 2005-01 Paro-II T/P 119102 Gauge #3
 Cntrl  19200
 
 # Download Baudrate
-Dwnld  230400
+Dwnld  38400
 
 # UART LED (OFF for deployment)
 UARTLED  OFF
@@ -111,7 +109,7 @@ PassLstn  ON
 PassTalk  OFF
 
 # Listen Mode (ASC or BIN)
-LstnMode  BIN
+LstnMode  ASC
 
 # Low Voltage (fixed)
 # LowVolt  4960
