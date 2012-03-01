@@ -213,6 +213,25 @@ def calibrate_U1362A(Raw=[0x5A28E6, 0x80B536A8, 0x85201A2B, 0x7DF02102]):
     Out.append(calibrateParoP(Raw[3],Coeffs=CP_SF,Temp=Out[0]))
     return Out
 
+def calibrate_JFast(Raw=[0x5B0764, 0x2A5FE435, 0x7D85DBEE,
+                                   0x2AF725E5, 0x81337C12, 0x2A2D680F, 0x8161079A]):
+    """Calibration for the 2012 JFast setup
+    """
+    RTC_ID=0xB4
+    Out=[]
+    CP_SF=getParoCoeffs(119102) # Gauge 3
+    CP_S1=getParoCoeffs(119099) # Gauge 1
+    CP_S2=getParoCoeffs(119101) # Gauge 2
+    CT_Ti=getPlatinumCoeffs(0x9A)
+    Out.append(calibratePlatinum(Raw[0],Coeffs=CT_Ti))
+    Out.append(calibrateParoT(Raw[1],Coeffs=CP_S1))
+    Out.append(calibrateParoP(Raw[2],Coeffs=CP_S1,xFT=Raw[1]))
+    Out.append(calibrateParoT(Raw[3],Coeffs=CP_S2))
+    Out.append(calibrateParoP(Raw[4],Coeffs=CP_S2,xFT=Raw[3]))
+    Out.append(calibrateParoT(Raw[5],Coeffs=CP_SF))
+    Out.append(calibrateParoP(Raw[6],Coeffs=CP_SF,xFT=Raw[5]))
+    return Out
+
 def calibrate_U1362B(Raw=[0x485484, 0x289F3D18, 0x7F7ABA66, 0x838C3082, 0x00000000, 0x7F501E6C]):
     """Calibration for the U1362B (initially 1027C) setup as it was in stalled on IODP Exp 327
     in Jul 2010. The Screen #3 gauge was just unplugged => crosstalk garbage.
