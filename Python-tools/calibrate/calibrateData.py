@@ -190,10 +190,10 @@ def calibrate_U1364A(Raw=[0x554E8A,0x2ABDD2BB,0x82907AA7,0x8125BB8A,0x7ECD98A3,0
     CT_Ti=getPlatinumCoeffs(0x92)
     Out.append(calibratePlatinum(Raw[0],Coeffs=CT_Ti))
     Out.append(calibrateParoT(Raw[1],Coeffs=CP_SF))
-    Out.append(calibrateParoP(Raw[2],Coeffs=CP_S1,Temp=Out[1]))
-    Out.append(calibrateParoP(Raw[3],Coeffs=CP_S2,Temp=Out[1]))
-    Out.append(calibrateParoP(Raw[4],Coeffs=CP_S3,Temp=Out[1]))
-    Out.append(calibrateParoP(Raw[5],Coeffs=CP_S4,Temp=Out[1]))
+    Out.append(calibrateParoP(Raw[2],Coeffs=CP_S1,Temp=Out[0]))
+    Out.append(calibrateParoP(Raw[3],Coeffs=CP_S2,Temp=Out[0]))
+    Out.append(calibrateParoP(Raw[4],Coeffs=CP_S3,Temp=Out[0]))
+    Out.append(calibrateParoP(Raw[5],Coeffs=CP_S4,Temp=Out[0]))
     Out.append(calibrateParoP(Raw[6],Coeffs=CP_SF,xFT=Raw[1]))
     return Out
 
