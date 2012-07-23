@@ -16,6 +16,7 @@ def parseCMDOpts():
     help_c="""Force number of paro channels"""
     help_n="""Skip stats--they can take some time and generate some clutter"""
     help_I="""Force RTC ID #. Supply id as hex integer (e.g. 0x8C). Default: 5th byte in file"""
+    help_oldCORK="""Assume data is from an old ML-CORK where the readings do not end with 0x00"""
     help_d="""Remove detected spikes by inserting linear interpolation."""
     help_p="""Plots the data. May not work if you do not have the right libaries installed"""
     help_i="""Just output statistics (and plot, optionally) and not the actual data"""
@@ -33,6 +34,7 @@ def parseCMDOpts():
     parser.add_option("-p","--plot_data",action="store_true",dest='doPlots',default=False,\
                                                                                 help=help_p)
     parser.add_option("-i","--info_only",action="store_true",dest='info',default=False,help=help_i)
+    parser.add_option("-o","--old_ML-CORK",action="store_true",dest='oldCORK',default=False,help=help_oldCORK)
     parser.add_option("-t","--timestamps",action="store_true",dest='writeTimestamp',default=False,\
                                                                                             help=help_t)
     parser.add_option("-f","--timestampFMT",type="string",dest='timestampFMT',\
@@ -236,7 +238,9 @@ if __name__=='__main__':
     if not options.nchannels:    
         recLen=recordLength(Data,loggerID=loggerID)
     else:
-        recLen=8+4*options.nchannels+1
+        recLen=8+4*options.nchannels
+        if not options.oldCORK:
+            recLen += 1
     
     print recLen
 #    recType=np.dtype([('t',np.uint32),('ID_Ti',np.uint32),('Freqs',(np.uint32,(1,(recLen-9)/4))),('trailer',np.uint8)]);
@@ -255,7 +259,11 @@ if __name__=='__main__':
     # Patch the data with a few records of logger IDs at the to simplify consistency checking
     Data=np.concatenate((Data,loggerID*np.ones(3*recLen, dtype=Data.dtype)),axis=1)
     #IdxGood=np.where(np.logical_and(((Data[IdIdx[0:-2]]-Data[IdIdx[0:-2]+recLen]) == 0), (Data[IdIdx[0:-2]+recLen-5]==0)))[0]
-    IdxGood=np.where(np.logical_and(((Data[IdIdx]-Data[IdIdx+recLen]) == 0), (Data[IdIdx+recLen-5]==0)))[0]
+    if options.oldCORK:
+        IdxGood=np.where(((Data[IdIdx]-Data[IdIdx+recLen]) == 0))[0]
+    else:
+        IdxGood=np.where(np.logical_and(((Data[IdIdx]-Data[IdIdx+recLen]) == 0), (Data[IdIdx+recLen-5]==0)))[0]
+        
     #IdxGood=np.where(Data[IdIdx[0:-2]+recLen-5]==0)[0]
     IdIdx=IdIdx[IdxGood]-4
     lastIdx=-recLen
@@ -294,17 +302,22 @@ if __name__=='__main__':
                 garbage=tuple(Data[lastIdx:idx].tolist())
                 print len(garbage)*'%02x' % garbage
                 print '--------------------------------------------'
-                
+        if options.oldCORK:
+            zeroFmt=''
+        else:
+            zeroFmt=r'%02X'
         if not options.spaces:
-            print (((recLen)/4*'%02X%02X%02X%02X')+'%02X') \
+            print (((recLen)/4*'%02X%02X%02X%02X')+zeroFmt) \
                        % tuple(Data[idx:idx+recLen].tolist())
         else:
             print ( '%02X%02X%02X%02X %02X %02X%02X%02X '+  \
-                   ((recLen-8)/4*'%02X%02X%02X%02X ')+'%02X') \
+                   ((recLen-8)/4*'%02X%02X%02X%02X ')+zeroFmt) \
                      % tuple(Data[idx:idx+recLen].tolist())
         if options.binaryFile:
             #Data[idx:idx+recLen].tofile(binFile)
+            #if calibratePPCTime(CurrTime).second == 0: # only return data that is sampled on the minute
             binFile.write(Data[idx:idx+recLen].tostring(order=None))
+            
         goodRecords += 1
         if goodRecords == 1:
             firstTime=CurrTime
