@@ -77,6 +77,41 @@ def getPlatinumCoeffs(ID=None):
         warn('Using default temperature calibration!!!!')
         return {'a': -2.95083e-006, 'b' : 40.0678 }
 
+
+def readThermistorCoeffs():
+    Coeffs={}
+    f=open(os.path.join(ConfigPath,'therms.txt'))
+    N=0
+    while True:
+        try:
+            N += 1
+            #print '======= ', N
+            line=f.readline()
+            ThermID=int(line.split()[0],16) # Hex id
+            Coeffs[ThermID]={}
+            while True:
+                line=f.readline().split()
+                #print line
+                Coeffs[ThermID][line[0].lower()]=float(line[1])
+                if line[0].lower() == 'x6':
+                    break
+        except:
+            # print "Done!!!!!!!!!!!"
+            break
+        # print '%X' % PlatID, Coeffs[PlatID]
+    f.close()
+    return Coeffs
+
+
+thermistorCoeffs=readThermistorCoeffs()    
+def getThermistorCoeffs(ID=None):
+    try:
+        return thermistorCoeffs[ID]
+        
+    except KeyError:
+        warn('Cannot find calibation for thermistor %d !!!!' % ID)
+        return None
+
 ParoCoeffs=readParoCoeffs()        
 def getParoCoeffs(ID=None):
     try:
@@ -111,6 +146,21 @@ def calibratePlatinum(xT,Coeffs=None,ID=None):
     C=Coeffs
     return C['a']*xT+C['b']
     
+def calibrateThermistor(xR,Coeffs=None,ID=None):
+    """Calibrate temperatures from thermistor.
+    """
+    C=Coeffs
+    # Compute resistivities from counts
+    R=C['x3']*(xR-C['x1'])/(C['x2']-C['x4']*(xR-C['x1']))
+    # Do boilerplate Steinhart and Hart
+    lnR=np.log(R)
+    invT=C['a']+C['b']*lnR+C['c']*(lnR**3)
+    Traw=1/invT-273.15
+    # Do linear correction "calibration"
+    slope=(C['x5']-C['x6'])/(C['x6']-25)
+    return Traw+slope*(Traw-25)
+    
+
 def calibrateParoP(xFP,Coeffs=None,xFT=None, Temp=None):
     if xFP==0:
         return np.nan;
@@ -278,6 +328,18 @@ def calibrate_857D(Raw=[0x456366, 0x816EB860, 0x82121169]):
     Out.append(calibrateParoP(Raw[2],Coeffs=CP_SF,Temp=Out[0]))
     return Out
 
+def calibrate_1026B(Raw=[0xB703B0, 0x6785A6B7, 0x6882A2C6]):
+    """Calibration for the NC 1026B CORK
+    """
+    RTC_ID=0x72
+    Out=[]
+    CP_SF=getParoCoeffs(107550)
+    CP_S1=getParoCoeffs(107549)
+    CT_Ti=getThermistorCoeffs(0x02)
+    Out.append(calibrateThermistor(Raw[0],Coeffs=CT_Ti))
+    Out.append(calibrateParoP(Raw[1],Coeffs=CP_S1,Temp=Out[0]))
+    Out.append(calibrateParoP(Raw[2],Coeffs=CP_SF,Temp=Out[0]))
+    return Out
 
 def calibrate_Endeavour_BPR83(Raw=[0x62C101, 0x2A3FFD76, 0x80DC9B7D]):
     RTC_ID=0x83
