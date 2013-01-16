@@ -8,6 +8,9 @@
 #define CR 13
 #define LF 10
 
+// Maximum number of sites in sites.txt
+#define MAXSITES 100
+
 int initialize_vals(int therm);
 int getint (int min, int max);
 double getfloat (void);
@@ -366,15 +369,15 @@ int getsn(int nTsensor, int nParo){
 	int nChan;
 	int nSites = 0;
 	int ret[9] = {1,1,1,1,1,1,1,1,1};
-	char name[30][10],date[30][10],buff[80]; //loaded from sites.txt
-	long int x[30][9];						 //press gauge SN from sites.txt
-	//int t[30];
-	char t[30][3];								 //thermometer SN from sites.txt
-	int nsens[30];  //number of pressure channels for each site in sites.txt
+	char name[MAXSITES][10],date[MAXSITES][10],buff[80]; //loaded from sites.txt
+	long int x[MAXSITES][9];						 //press gauge SN from sites.txt
+	//int t[MAXSITES];
+	char t[MAXSITES][3];								 //thermometer SN from sites.txt
+	int nsens[MAXSITES];  //number of pressure channels for each site in sites.txt
 	FILE *pSites;
 	static long int Paro;
 	static char Tsensor[256];
-	//unsigned char queue4sensor[9][30] = 
+	//unsigned char queue4sensor[9][MAXSITES] = 
 	printf("\n\rSerial numbers are required.\n\rSelect from site list:\n\r");
 	
 	pSites = fopen("sites.txt","rt");
@@ -385,7 +388,7 @@ int getsn(int nTsensor, int nParo){
 		fgets(buff,sizeof(buff),pSites);	// 3rd and blank line
 		memset (t, 0, sizeof (t));
 		memset (x, 0, sizeof (x));
-		for(k=0;k<30;k++){  //there has to be a faster way.  All of these loops take forever!
+		for(k=0;k<MAXSITES;k++){  //there has to be a faster way.  All of these loops take forever!
 			fgets(buff,sizeof(buff),pSites);
 			if(feof(pSites)!=0) break;
 
