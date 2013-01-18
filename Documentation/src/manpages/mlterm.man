@@ -1,0 +1,24 @@
+Usage: mlterm [OPTION] ... [DEVICE]
+  Options:
+    -b BAUDRATE     baudrate for terminal (should match instrument) deflt: 19200
+    -C              Clear memory
+    -d FILENAME     debug output file
+    -D FILENAME     Download data to raw output file
+    -p FILENAME     parameter error output file (companion to -W)
+    -F              Full status report
+    -G FILENAME     Get eerom and output to parameter file
+    -h              display this help and exit
+    -l FILENAME     log output file
+    -M FILENAME     Metadata (and naked eerom) to  output file
+    -n HOST[:PORT]  host (and optional network port; default is 4001) for 
+                    networked serial device
+    -W FILENAME     Write parameter input file to instrument eerom
+    -I              Initial status report
+    -P              low level (Pass-thru) mlterm for advanced users
+    -R              Recover communications
+    -s SITENAME     name as in sites.txt to format data (companion to -U)
+    -Y              sYnchronize instrument clock time
+    -U COUNT        display data in engineering Units for COUNT samples
+                    enter '' to display til ESC
+    -v              verbose output to screen and log file
+  DEVICE is the serial port device file; default is /dev/ttyUSB0
