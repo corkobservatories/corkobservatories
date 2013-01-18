@@ -1,5 +1,8 @@
 @ECHO OFF
 
+rem python ..\..\Python-tools\calibrate\dumpBin.py --help > manpages\dumpBin.man
+rem python ..\..\Python-tools\calibrate\calibrateLogfile.py --help > manpages\calibrateLogfile.man
+
 REM Command file for Sphinx documentation
 
 if "%SPHINXBUILD%" == "" (
