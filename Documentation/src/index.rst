@@ -8,17 +8,34 @@ Welcome to CORK and BPR documentation!
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
+   :glob:
    
    FieldGuide
+   ComputerSetup
+   Manpages
+   Todos
 
-..  Indices and tables
-    ==================
-    
-    * :ref:`genindex`
-    * :ref:`modindex`
-    * :ref:`search`
+   
+References
+-----------
+:ref:`genindex`
+:ref:`modindex`
+:ref:`search`
 
-Todo's
--------
-.. todolist::
+
+Python modules
+---------------
+
+.. automodule:: calibrateData
+   :members:
+   :undoc-members:
+   
+.. automodule:: calibrateLogfile
+   :members:
+   :undoc-members:
+   
+.. automodule:: dumpBin
+   :members:
+   :undoc-members:
+   

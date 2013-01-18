@@ -11,13 +11,15 @@ def parseCMDOpts():
     # http://docs.python.org/library/optparse.html
     usage="usage: %prog [options] logfile.log"
     description="""This script find raw data in mlterm logfiles and calibrates it"""
-    help_c="""Name of calibration defined in calibrateData.py (required)"""
+    help_l="""Lists available calibrations and quits"""
+    help_c="""Name of calibration defined in calibrateData.py"""
     help_s="""Skip the check whether the number of calibrated value equals the number of 
              binary input fields. Use this e.g. for 1362B where one existing channel 
              contains garbage and is not used..."""
     parser=OptionParser(usage=usage, description=description)
     parser.add_option("-c","--calibration",type="string",default=None,help=help_c)
     parser.add_option("-s","--skip_length_check",action="store_false",dest='lengthCheck',default=False,help=help_s)
+    parser.add_option("-l","--list_calibrations",action="store_true",dest='listCalibrations',default=False,help=help_l)
     
     # parser.add_option("-l","--logfile",type="string",default='test.log')
     return parser.parse_args()
@@ -28,6 +30,19 @@ if __name__=='__main__':
     import calibrateData as CD
     
     (options, args) = parseCMDOpts()
+    
+    if options.listCalibrations:
+        funs=dir(CD)
+        funs.sort()
+        for fun in funs:
+            if 'calibrate_' in fun:
+                print '---------- ' + fun[10:] +' ----------'
+                calFun = getattr(CD, fun)
+                if calFun.func_doc:
+                    print calFun.func_doc
+                
+        quit()
+        
     if len(args) == 0:
         fileName='STDIN'
         f=sys.stdin

@@ -415,6 +415,7 @@ def calibrate_NT_C10_SmartPlug(Raw=[0x4DFECE,0x2A56471B,0x810EF6F3,0x7FA0622E]):
     return Out
 
 def calibrate_DoNet1(Raw=[0x5C9A97,0x2C2C0084,0x8184FF79,0x817E1C06,0x8055EE4D,0x7E72B834]):
+    """Calibration for NanTroSEIZE C02 CORK""" 
     RTC_ID=0x01
     Out=[]
     CP_SF=getParoCoeffs(108829)
@@ -465,3 +466,4 @@ if __name__=='__main__':
     
     import doctest
     doctest.testmod()
+    
