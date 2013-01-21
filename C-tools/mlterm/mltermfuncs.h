@@ -25,12 +25,22 @@
 
 #define max(x,y)        (((x) >= (y)) ? (x) : (y))
 #define min(x,y)        (((x) <= (y)) ? (x) : (y))
-#define fasttalk(x)		talk ((x), 0.025)
-#define slowtalk(x)		talk ((x), 0.250)
-#define Qtalk(x)		talk ((x), 1.0)  //was able to reduce this time once I added an extra 
+
+#ifdef VPN
+    // Define more relaxed timeouts for TCP/IP VPN connections
+#   define fasttalk(x)		talk ((x), 0.525)
+#   define slowtalk(x)		talk ((x), 0.750)
+#   define Qtalk(x)		talk ((x), 1.5)
+#else
+    // Regular timeout settings for direct connections
+#   define fasttalk(x)		talk ((x), 0.025)
+#   define slowtalk(x)		talk ((x), 0.250)
+#   define Qtalk(x)		talk ((x), 1.0)  //was able to reduce this time once I added an extra 
 										  //1 second nap after the quit from menu in rtcppc.c
 										  //I know that 0.5 still fails with the slower devices (RS422 to RS232 conversion) 
 										  //0.75 failed with USB COM PRO
+#endif
+
 #define NumElm(x)		(sizeof (x) / sizeof (*(x)))
 
 /* autodnload.c */

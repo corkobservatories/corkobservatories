@@ -7,14 +7,18 @@ INSTALL_PATH = /usr/bin/mlterm
 mlterm: mlterm.o dos2linux.o download.o sbp.o stream.o xmocrc.o crc.o ttyfuncs.o opnfilna.o opnparamfile.o settime.o help.o debug.o termln.o formattime.o talk.o lstn.o lstndouble.o lstnMT01.o MT01funcs.o hex2int.o ishexstring.o rtcppc.o write_eerom_line.o formatdata.o parseIOfile.o validate.o cvt_eerom.o isspecialkey.o dump.o clearserialbuf.o log_printf.o socket.o wake.o menu.o quit.o restore.o usermenu.o par_dnload.o par_upload.o mltermlin.o get_meta.o status.o autodnload.o signals.o strndup.o
 	$(CC) $(LDFLAGS) -o $@ $^
 
-mlterm_vpn: mlterm_vpn.o dos2linux.o download.o sbp.o stream.o xmocrc.o crc.o ttyfuncs.o opnfilna.o opnparamfile.o settime.o help.o debug.o termln.o formattime.o talk.o lstn.o lstndouble.o lstnMT01.o MT01funcs.o hex2int.o ishexstring.o rtcppc.o write_eerom_line.o formatdata.o parseIOfile.o validate.o cvt_eerom.o isspecialkey.o dump.o clearserialbuf.o log_printf.o socket.o wake.o menu.o quit.o restore.o usermenu.o par_dnload.o par_upload.o mltermlin.o get_meta.o status.o autodnload.o signals.o strndup.o
+mlterm_vpn: mlterm_vpn.o dos2linux.o download.o sbp.o stream.o xmocrc.o crc.o ttyfuncs.o opnfilna.o opnparamfile.o settime.o help.o debug.o termln.o formattime.o talk.o lstn.o lstndouble.o lstnMT01_vpn.o MT01funcs.o hex2int.o ishexstring.o rtcppc.o write_eerom_line.o formatdata.o parseIOfile.o validate.o cvt_eerom.o isspecialkey.o dump.o clearserialbuf.o log_printf.o socket.o wake.o menu.o quit.o restore.o usermenu.o par_dnload.o par_upload.o mltermlin.o get_meta.o status.o autodnload.o signals.o strndup.o
 	$(CC) $(LDFLAGS) -o $@ $^
 
-install: mlterm
-	cp -f $^ $(INSTALL_PATH) 
+install: mlterm mlterm_vpn
+#	cp -f $^ $(INSTALL_PATH) 
+	cp -f mlterm $(INSTALL_PATH)
+	cp -f mlterm_vpn /usr/bin/mlterm_vpn
 ifeq ($(OSTYPE),Linux)
 	chown root:root $(INSTALL_PATH)
 	chmod 4711 $(INSTALL_PATH)
+	chown root:root /usr/bin/mlterm_vpn
+	chmod 4711 /usr/bin/mlterm_vpn
 endif
 
 autodnload.o: menu.h usermenu.h ttyfuncdecs.h mltermfuncs.h
@@ -52,6 +56,9 @@ lstndouble.o: mltermfuncs.h ttyfuncdecs.h
 
 lstnMT01.o: mltermfuncs.h ttyfuncdecs.h
 
+lstnMT01_vpn.o: lstnMT01.c mltermfuncs.h ttyfuncdecs.h
+	$(CC) $(CFLAGS) -DVPN -c lstnMT01.c -o $@
+
 menu.o: menu.h mltermfuncs.h param.h
 
 mltermlin.o: mltermfuncs.h param.h specialkeys.h 
@@ -59,7 +66,7 @@ mltermlin.o: mltermfuncs.h param.h specialkeys.h
 mlterm.o: mltermfuncs.h ttyfuncdecs.h param.h usermenu.h
 
 mlterm_vpn.o: mlterm.c mltermfuncs.h ttyfuncdecs.h param.h usermenu.h
-	$(CC) $(CFLAGS) -DVPN -c mlterm.c-o $@
+	$(CC) $(CFLAGS) -DVPN -c mlterm.c -o $@
 
 MT01funcs.o: mltermfuncs.h ttyfuncdecs.h usermenu.h
 
