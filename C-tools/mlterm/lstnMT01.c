@@ -28,7 +28,15 @@ lstnMT01(char *valid_str){
 		FD_ZERO (&rfds);    //if I don't reset all of these, then in the next
 		FD_SET (ifd, &rfds);    //call to select, only whichever fd that was set
 		tv.tv_sec = 0;
+
+#ifdef VPN
+		// Relaxed timeout for TCP/IP VPN connections
+		tv.tv_usec = 600000;
+#else
+		// Regular timeout for direct connections
 		tv.tv_usec = 100000;
+#endif
+
 		if (select(ifd + 1,&rfds,NULL,NULL, &tv) < 0) {
 			if (errno != EINTR)
 				break;
