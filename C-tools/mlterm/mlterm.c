@@ -37,6 +37,9 @@ main (int argc, char **argv)
 	//       Try to keep usage within 80 columns
 	//       12345678901234567890123456789012345678901234567890123456789012345678901234567890
 			"Usage: %s [OPTION] ... [DEVICE]\n"
+#ifdef VPN
+			"This version of mlterm has relaxed timeout criteria for TCP/IP connections.\n"
+#endif
 	"  Options:\n"
 			"    -b BAUDRATE     baudrate for terminal (should match instrument) deflt: 19200\n"
 			"    -C              Clear memory\n"

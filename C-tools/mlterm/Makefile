@@ -7,6 +7,9 @@ INSTALL_PATH = /usr/bin/mlterm
 mlterm: mlterm.o dos2linux.o download.o sbp.o stream.o xmocrc.o crc.o ttyfuncs.o opnfilna.o opnparamfile.o settime.o help.o debug.o termln.o formattime.o talk.o lstn.o lstndouble.o lstnMT01.o MT01funcs.o hex2int.o ishexstring.o rtcppc.o write_eerom_line.o formatdata.o parseIOfile.o validate.o cvt_eerom.o isspecialkey.o dump.o clearserialbuf.o log_printf.o socket.o wake.o menu.o quit.o restore.o usermenu.o par_dnload.o par_upload.o mltermlin.o get_meta.o status.o autodnload.o signals.o strndup.o
 	$(CC) $(LDFLAGS) -o $@ $^
 
+mlterm_vpn: mlterm_vpn.o dos2linux.o download.o sbp.o stream.o xmocrc.o crc.o ttyfuncs.o opnfilna.o opnparamfile.o settime.o help.o debug.o termln.o formattime.o talk.o lstn.o lstndouble.o lstnMT01.o MT01funcs.o hex2int.o ishexstring.o rtcppc.o write_eerom_line.o formatdata.o parseIOfile.o validate.o cvt_eerom.o isspecialkey.o dump.o clearserialbuf.o log_printf.o socket.o wake.o menu.o quit.o restore.o usermenu.o par_dnload.o par_upload.o mltermlin.o get_meta.o status.o autodnload.o signals.o strndup.o
+	$(CC) $(LDFLAGS) -o $@ $^
+
 install: mlterm
 	cp -f $^ $(INSTALL_PATH) 
 ifeq ($(OSTYPE),Linux)
@@ -54,6 +57,9 @@ menu.o: menu.h mltermfuncs.h param.h
 mltermlin.o: mltermfuncs.h param.h specialkeys.h 
 
 mlterm.o: mltermfuncs.h ttyfuncdecs.h param.h usermenu.h
+
+mlterm_vpn.o: mlterm.c mltermfuncs.h ttyfuncdecs.h param.h usermenu.h
+	$(CC) $(CFLAGS) -DVPN -c mlterm.c-o $@
 
 MT01funcs.o: mltermfuncs.h ttyfuncdecs.h usermenu.h
 
@@ -103,4 +109,4 @@ mltermfuncs.h: menu.h
 	touch mltermfuncs.h
 
 clean:
-	rm -rf *.o mlterm $(INSTALL_PATH)
+	rm -rf *.o mlterm mlterm_vpn $(INSTALL_PATH)
