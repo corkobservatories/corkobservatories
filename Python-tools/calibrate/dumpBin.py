@@ -128,10 +128,11 @@ def getStatistics(Data, loggerID=None,do_plots=False,interp_spikes=False):
     
     print Freqs.shape
     print Freqs
+    spikeThreshold=0.007 # 0.01 might still leave spikes on T-Channel
     for SensNo in range(Freqs.shape[1]):
         print '=== Sensor %d ===' % SensNo
         i=1
-        spikeDetect=np.where(np.abs(np.diff(Freqs[0:,SensNo]/1e9,axis=0))>0.01)
+        spikeDetect=np.where(np.abs(np.diff(Freqs[0:,SensNo]/1e9,axis=0))>spikeThreshold) 
         # print spikeDetect
         while i< len(spikeDetect[0]):
             if (spikeDetect[0][i]-spikeDetect[0][i-1])<=3: 
@@ -155,7 +156,7 @@ def getStatistics(Data, loggerID=None,do_plots=False,interp_spikes=False):
                 print 'No Spike...'
                 i+=1
     #print np.float(Freqs)    
-    spikes=np.where(np.abs(np.diff(Freqs/1e9,axis=0))>0.01)
+    spikes=np.where(np.abs(np.diff(Freqs/1e9,axis=0))>spikeThreshold)
     
     NFreqs=Freqs.copy()
     print NFreqs[0:5]
