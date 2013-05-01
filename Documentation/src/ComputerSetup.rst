@@ -51,6 +51,9 @@ cd into the ``mlterm``, ``mlbin``, and ``mldat`` directories under ``~/corkobser
 
 in each directory to compile and install the programs individually.
 
+NOTE: there is also a variant of mlterm ``mlterm_vpn`` that gets automatically installed with mlterm that is for use with
+instruments connected over connections with high latency (e.g. TCP/IP, VPN,...).
+
 Install RS-422 adapter driver if necessary
 ===========================================
 
