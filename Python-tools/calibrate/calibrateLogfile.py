@@ -72,9 +72,9 @@ if __name__=='__main__':
             Data=calibrateData(xData)
             if options.lengthCheck:
                 if len(Data)==len(xData):
-                    print t,(len(Data)*'%.4f ') % tuple(Data)
+                    print t,(len(Data)*'%.7f ') % tuple(Data)
             else:
-                print t,(len(Data)*'%.4f ') % tuple(Data)
+                print t,(len(Data)*'%.7f ') % tuple(Data)
                 
         except:
             #print exc_info()[0]

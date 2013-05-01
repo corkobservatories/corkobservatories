@@ -119,7 +119,11 @@ def getParoCoeffs(ID=None):
         return ParoCoeffs[ID]
     except KeyError:
         raise Exception, 'You have to supply a valid probe serial # !!!!'
-
+    
+def getParoIdList():
+    IDs=ParoCoeffs.keys()
+    IDs.sort()
+    return IDs
     
 def calibrateParoT(xFT,Coeffs=None):
     """Calibrate temperatures from Paroscientifc Type-II gauges.
