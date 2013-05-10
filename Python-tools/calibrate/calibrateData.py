@@ -357,8 +357,9 @@ def calibrate_857D(Raw=[0x456366, 0x816EB860, 0x82121169]):
     Out.append(calibrateParoP(Raw[2],Coeffs=CP_SF,Temp=Out[0]))
     return Out
 
-def calibrate_858G(Raw=[0x456366, 0x816EB860, 0x82121169]):
-    """Calibration for the 858G Middle Valley replacement reCORKed in May 2013. 
+def calibrate_858G(Raw=[0x456366, 0x2A3FFD76, 0x80DC9B7D,0x2A3FFD76, 0x80DC9B7D]):
+    """Calibration for the 858G Middle Valley replacement reCORKed in May 2013.
+       Output: T_Pt, P_S1, P_Sf, T_S1, T_Sf
     """
     RTC_ID=0xBC
     Out=[]
@@ -366,10 +367,10 @@ def calibrate_858G(Raw=[0x456366, 0x816EB860, 0x82121169]):
     CP_S1=getParoCoeffs(125833)
     CT_Ti=getPlatinumCoeffs(0xA3)
     Out.append(calibratePlatinum(Raw[0],Coeffs=CT_Ti))
-    Out.append(calibrateParoT(Raw[1],Coeffs=CP_SF))
-    Out.append(calibrateParoP(Raw[2],Coeffs=CP_SF,xFT=Raw[1]))
-    Out.append(calibrateParoT(Raw[3],Coeffs=CP_SF))
-    Out.append(calibrateParoP(Raw[4],Coeffs=CP_SF,xFT=Raw[3]))
+    Out.append(calibrateParoP(Raw[1],Coeffs=CP_S1,xFT=Raw[3]))
+    Out.append(calibrateParoP(Raw[2],Coeffs=CP_SF,xFT=Raw[4]))
+    Out.append(calibrateParoT(Raw[3],Coeffs=CP_S1))
+    Out.append(calibrateParoT(Raw[4],Coeffs=CP_SF))
     return Out
 
 def calibrate_1026B(Raw=[0xB703B0, 0x6785A6B7, 0x6882A2C6]):
