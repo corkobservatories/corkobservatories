@@ -357,6 +357,21 @@ def calibrate_857D(Raw=[0x456366, 0x816EB860, 0x82121169]):
     Out.append(calibrateParoP(Raw[2],Coeffs=CP_SF,Temp=Out[0]))
     return Out
 
+def calibrate_858G(Raw=[0x456366, 0x816EB860, 0x82121169]):
+    """Calibration for the 858G Middle Valley replacement reCORKed in May 2013. 
+    """
+    RTC_ID=0xBC
+    Out=[]
+    CP_SF=getParoCoeffs(125834)
+    CP_S1=getParoCoeffs(125833)
+    CT_Ti=getPlatinumCoeffs(0xA3)
+    Out.append(calibratePlatinum(Raw[0],Coeffs=CT_Ti))
+    Out.append(calibrateParoT(Raw[1],Coeffs=CP_SF))
+    Out.append(calibrateParoP(Raw[2],Coeffs=CP_SF,xFT=Raw[1]))
+    Out.append(calibrateParoT(Raw[3],Coeffs=CP_SF))
+    Out.append(calibrateParoP(Raw[4],Coeffs=CP_SF,xFT=Raw[3]))
+    return Out
+
 def calibrate_1026B(Raw=[0xB703B0, 0x6785A6B7, 0x6882A2C6]):
     """Calibration for the NC 1026B CORK
     """
