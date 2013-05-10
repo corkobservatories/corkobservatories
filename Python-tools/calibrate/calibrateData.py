@@ -4,7 +4,7 @@ Basic functions needed to calibrate ML-CORK / BPR data.
 
 More text to describe what's going on
 """
-
+import warnings
 import numpy as np
 import datetime
 
@@ -44,6 +44,30 @@ def readParoCoeffs():
     
     return Coeffs
 
+#import traceback 
+def readSites():
+    """Read information from sites.txt file."""
+    Sites={}
+    N=0
+    for line in  open(os.path.join(ConfigPath,'sites.txt')):
+        try:
+            N += 1
+            #print '======= ', N
+            line=line.split()
+            #print line
+            siteName,rtcId=line[0].split('_')
+            rtcId=int(rtcId,16) # Hex Id
+            deploymentDate=line[1]
+            temperatureId=int(line[2],16) # Hex Id
+            paroIds=[int(id) for id in line[3:]]
+            Sites[siteName]={'rtcId': rtcId, 'deploymentDate': deploymentDate,
+                          'temperatureId': temperatureId, 'paroIds' : paroIds}
+            #print 'yes'
+        except:
+            pass
+            #print traceback.format_exc()
+    return Sites
+    
 def readPlatinumCoeffs():
     Coeffs={}
     f=open(os.path.join(ConfigPath,'platinum.txt'))
@@ -64,7 +88,6 @@ def readPlatinumCoeffs():
         Coeffs[PlatID]={'a': float(line1[1]), 'b': float(line2[1])}
         # print '%X' % PlatID, Coeffs[PlatID]
     f.close()
-    
     return Coeffs
 
 
@@ -74,8 +97,9 @@ def getPlatinumCoeffs(ID=None):
         return PlatinumCoeffs[ID]
             
     except KeyError:
-        warn('Using default temperature calibration!!!!')
-        return {'a': -2.95083e-006, 'b' : 40.0678 }
+        warnings.warn('Using default temperature calibration!!!!')
+        print 'Cannot find calibation for platinum chip %X !!!!' % ID
+        return {'a': -2.93721e-006, 'b' : 40.0678 } # What is defaults ?? {'a': -2.95083e-006, 'b' : 40.0678 }
 
 
 def readThermistorCoeffs():
@@ -109,7 +133,8 @@ def getThermistorCoeffs(ID=None):
         return thermistorCoeffs[ID]
         
     except KeyError:
-        warn('Cannot find calibation for thermistor %d !!!!' % ID)
+        warnings.warn('Cannot find calibation for thermistor %d !!!!' % ID)
+        print 'Cannot find calibation for thermistor %d !!!!' % ID
         return None
 
 ParoCoeffs=readParoCoeffs()        
