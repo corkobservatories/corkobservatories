@@ -1,0 +1,15 @@
+Usage: calibrateLogfile.py [options] logfile.log
+
+This script find raw data in mlterm logfiles and calibrates it
+
+Options:
+  -h, --help            show this help message and exit
+  -c CALIBRATION, --calibration=CALIBRATION
+                        Name of calibration defined in calibrateData.py
+                        (required)
+  -s, --skip_length_check
+                        Skip the check whether the number of calibrated value
+                        equals the number of               binary input
+                        fields. Use this e.g. for 1362B where one existing
+                        channel               contains garbage and is not
+                        used...

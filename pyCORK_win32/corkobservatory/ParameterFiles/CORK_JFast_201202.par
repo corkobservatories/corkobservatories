@@ -1,0 +1,118 @@
+[RTC]
+
+# MTO1Wake delay in milliseconds (fixed).
+# TxWakeDelay  10
+
+# Sample period in seconds (user editable).
+# Sample period must evenly divide 60 (subminute) or 3600 (subhourly).
+SamplePeriod  600
+
+# Delay until temperature measurement in milliseconds (fixed).
+# ThermometerWait  200
+
+# Mode selected sample period (user editable).
+# Enter 'A' for autonomous, 'C' for cabled, '1' for 1 Hz.
+ModeSelectedPeriod  A
+
+# Delay until time stamp is sent to MT01 (edits not recommended!).
+RTCTimeStampDelay  F000
+
+# Time to transmit 4 bytes of data from PPC (edits not recommended!).
+PPCDataXmitTime  F5
+
+# Number of PPC channels (user editable).
+# Maximum is 7.
+NumChannels  3
+
+# Start time (fixed). Use Synchronize Clock option in mlterm.
+# StartTime  2012/02/24 19:38:38
+
+# RTC Rate Tweak (REALLY fixed).
+# RTCRateTweak  9F
+
+# RTC Identifier (REALLY fixed).
+# RTCIdent  B4
+
+# 64bytes:1234567890123456789012345678901234567890123456789012345678901234
+MetaData  JFast: MT-02 C01-497 v2.2.4 (82982d) Platinum #9A
+
+
+[PPC*]
+
+# Paroscientific gauge warmup in milliseconds (edits not recommended)
+SensorWarmupTime  370
+
+# Enter 0 ms for Paro-1 gauges with no temperature measurement (edits not recommended)
+TempIntegrationTime  400
+
+# in milliseconds (edits not recommended)
+PressureIntegrationTime  800
+
+# in mA (edits not recommended)
+MaxSensorSteadyCurrent  10.1
+
+
+[PPC9]
+
+# PPC Calibration Coefficients (REALLY fixed).
+# CalibrationCoefficients  E889180EE91A08C2
+
+# 64bytes:1234567890123456789012345678901234567890123456789012345678901234
+MetaData  RTC(8e)/PPC(8c) 2011R04 Paro-II T/P 119099 Gauge #1
+
+
+[PPC1]
+
+# PPC Calibration Coefficients (REALLY fixed).
+# CalibrationCoefficients  E6661A82E5F40A0A
+
+# 64bytes:1234567890123456789012345678901234567890123456789012345678901234
+MetaData  dPPC(8c/8c) 2005-01 Paro-II T/P 119101 Gauge #2
+
+
+[PPC2]
+
+# PPC Calibration Coefficients (REALLY fixed).
+# CalibrationCoefficients  E7821A27E5E30A30
+
+# 64bytes:1234567890123456789012345678901234567890123456789012345678901234
+MetaData  dPPC(8c/8c) 2005-01 Paro-II T/P 119102 Gauge #3
+
+
+[MT01]
+
+# Data Baudrate (REALLY fixed)
+# Data  19200
+
+# Control Baudrate
+Cntrl  19200
+
+# Download Baudrate
+Dwnld  38400
+
+# UART LED (OFF for deployment)
+UARTLED  OFF
+
+# Power LED (OFF for deployment)
+PowerLED  OFF
+
+# Error LED (OFF for deployment)
+ErrorLED  OFF
+
+# Write LED (OFF for deployment)
+WriteLED  OFF
+
+# Pass Listen (ON to echo data over serial line)
+PassLstn  ON
+
+# Pass Talk (OFF for deployment!)
+PassTalk  OFF
+
+# Listen Mode (ASC or BIN)
+LstnMode  ASC
+
+# Low Voltage (fixed)
+# LowVolt  4960
+
+# OK Voltage (fixed)
+# OkVolt  6800
