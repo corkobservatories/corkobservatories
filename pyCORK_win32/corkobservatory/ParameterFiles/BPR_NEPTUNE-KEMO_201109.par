@@ -1,0 +1,97 @@
+[RTC]
+
+# MTO1Wake delay in milliseconds (fixed).
+# TxWakeDelay  10
+
+# Sample period in seconds (user editable).
+# Sample period must evenly divide 60 (subminute) or 3600 (subhourly).
+SamplePeriod  15
+
+# Delay until temperature measurement in milliseconds (fixed).
+# ThermometerWait  500
+
+# Mode selected sample period (user editable).
+# Enter 'A' for autonomous, 'C' for cabled, '1' for 1 Hz.
+ModeSelectedPeriod  C
+
+# Delay until time stamp is sent to MT01 (edits not recommended!).
+RTCTimeStampDelay  F380
+
+# Time to transmit 4 bytes of data from PPC (edits not recommended!).
+PPCDataXmitTime  F9
+
+# Number of PPC channels (user editable).
+# Maximum is 7.
+NumChannels  1
+
+# Start time (fixed). Use Synchronize Clock option in mlterm.
+# StartTime  2009/04/14 19:21:22
+
+# RTC Rate Tweak (REALLY fixed).
+# RTCRateTweak  C3
+
+# RTC Identifier (REALLY fixed).
+# RTCIdent  85
+
+# 64bytes:1234567890123456789012345678901234567890123456789012345678901234
+MetaData  BPR KEMO sample(bytes):time(4)id(1)temp(3)pressure(4)delim0(1)
+
+
+[PPC9]
+
+# Paroscientific gauge warmup in milliseconds (edits not recommended)
+SensorWarmupTime  370
+
+# Enter 0 ms for Paro-1 gauges with no temperature measurement (edits not recommended)
+TempIntegrationTime  0
+
+# in milliseconds (edits not recommended)
+PressureIntegrationTime  800
+
+# in mA (edits not recommended)
+MaxSensorSteadyCurrent  10.1
+
+# PPC Calibration Coefficients (REALLY fixed).
+# CalibrationCoefficients  E9B01758E9D60878
+
+# 64bytes:1234567890123456789012345678901234567890123456789012345678901234
+MetaData  SN(ver): T9B P120655 MT01C01-490(???) 2008R80(rtc8e ppc8c)
+
+
+[MT01]
+
+# Data Baudrate (REALLY fixed)
+# Data  19200
+
+# Control Baudrate
+Cntrl  115200
+
+# Download Baudrate
+Dwnld  115200
+
+# UART LED (OFF for deployment)
+UARTLED  OFF
+
+# Power LED (OFF for deployment)
+PowerLED  OFF
+
+# Error LED (OFF for deployment)
+ErrorLED  OFF
+
+# Write LED (OFF for deployment)
+WriteLED  OFF
+
+# Pass Listen (ON to echo data over serial line)
+PassLstn  ON
+
+# Pass Talk (OFF for deployment!)
+PassTalk  OFF
+
+# Listen Mode (ASC or BIN)
+LstnMode  ASC
+
+# Low Voltage (fixed)
+# LowVolt  4960
+
+# OK Voltage (fixed)
+# OkVolt  6800
