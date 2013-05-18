@@ -61,6 +61,7 @@ if "%1" == "singlehtml" (
 	%SPHINXBUILD% -b singlehtml %ALLSPHINXOPTS% %BUILDDIR%/singlehtml
 	echo.
 	echo.Build finished. The HTML pages are in %BUILDDIR%/singlehtml.
+    xcopy %BUILDDIR%\singlehtml ..\singlehtml /s
 	goto end
 )
 
@@ -108,6 +109,7 @@ if "%1" == "epub" (
 	%SPHINXBUILD% -b epub %ALLSPHINXOPTS% %BUILDDIR%/epub
 	echo.
 	echo.Build finished. The epub file is in %BUILDDIR%/epub.
+    copy %BUILDDIR%\epub\*.epub ..\
 	goto end
 )
 
@@ -115,6 +117,12 @@ if "%1" == "latex" (
 	%SPHINXBUILD% -b latex %ALLSPHINXOPTS% %BUILDDIR%/latex
 	echo.
 	echo.Build finished; the LaTeX files are in %BUILDDIR%/latex.
+    cd %BUILDDIR%\latex
+    "c:\Program Files (x86)\MiKTeX 2.8\miktex\bin\pdflatex" CORKandBPRdocumentation.tex
+    "c:\Program Files (x86)\MiKTeX 2.8\miktex\bin\makeindex.exe" CORKandBPRdocumentation.idx
+    "c:\Program Files (x86)\MiKTeX 2.8\miktex\bin\pdflatex" CORKandBPRdocumentation.tex
+    cd ..\..
+    copy %BUILDDIR%\latex\CORKandBPRdocumentation.pdf ..\
 	goto end
 )
 

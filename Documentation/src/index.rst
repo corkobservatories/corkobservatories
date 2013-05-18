@@ -17,16 +17,18 @@ http://corkobservatory.svn.sourceforge.net/viewvc/corkobservatory/
 This repository is used to keep the computers that are used to download data updated and in sync. It also contains all calibration and site information (see CalibrationFiles) and the details of the instrument configurations (see ParameterFiles). If you want to contribute to that information, you need to install subversion (svn) to stay up to date and push new updates to the software repository. Or you can ask me to make the modifications. I also use the repository the maintain some documentation of the software that you can access here:
 http://corkobservatory.sourceforge.net/
 
-
+.. sectionauthor:: Martin Heesemann <mheesema@uvic.ca>
 
 .. toctree::
    :maxdepth: 3
    :glob:
    
+   BeforeGoingToSea
    FieldGuide
    ComputerSetup
    Manpages
    Todos
+   PythonCode
 
    
 References
@@ -35,19 +37,3 @@ References
 :ref:`modindex`
 :ref:`search`
 
-
-Python modules
----------------
-
-.. automodule:: calibrateData
-   :members:
-   :undoc-members:
-   
-.. automodule:: calibrateLogfile
-   :members:
-   :undoc-members:
-   
-.. automodule:: dumpBin
-   :members:
-   :undoc-members:
-   
