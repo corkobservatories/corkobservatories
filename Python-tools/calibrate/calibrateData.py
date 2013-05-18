@@ -365,7 +365,7 @@ def calibrate_858G(Raw=[0x456366, 0x2A3FFD76, 0x80DC9B7D,0x2A3FFD76, 0x80DC9B7D]
     Out=[]
     CP_SF=getParoCoeffs(125834)
     CP_S1=getParoCoeffs(125833)
-    CT_Ti=getPlatinumCoeffs(0xA3)
+    CT_Ti=getPlatinumCoeffs(0x9B)
     Out.append(calibratePlatinum(Raw[0],Coeffs=CT_Ti))
     Out.append(calibrateParoP(Raw[1],Coeffs=CP_S1,xFT=Raw[3]))
     Out.append(calibrateParoP(Raw[2],Coeffs=CP_SF,xFT=Raw[4]))
