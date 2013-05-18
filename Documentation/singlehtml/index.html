@@ -1,0 +1,936 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>CORK and BPR documentation 0.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="None" href="index.html#document-index" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="index.html#document-index">CORK and BPR documentation 0.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html#document-index">Table Of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-BeforeGoingToSea">Before youo go to sea</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#make-sure-you-have-a-working-computer">Make sure you have a working computer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#verify-that-your-software-is-still-current">Verify that your software is still current</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-FieldGuide">CORK and BPR Field Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#crib-sheets">Crib sheets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#simple-health-check-and-download">Simple health check and download</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#howto-s">Howto&#8217;s</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#linux">Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#instrument-setup">Instrument setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#mlterm">mlterm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#data-post-processing">Data post-processing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#glossary">Glossary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-ComputerSetup">CORK Computer Setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#required-software">Required software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#check-out-the-cork-software-repository">Check out the CORK software repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#compile-and-install-mlterm-mlbin-mldat9">Compile and install mlterm, mlbin, mldat9</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#install-rs-422-adapter-driver-if-necessary">Install RS-422 adapter driver if necessary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#install-dependencies-for-python-scripts">Install dependencies for Python scripts</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-Manpages">Manpages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-Todos">Todos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-PythonCode">Python modules</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="welcome-to-cork-and-bpr-documentation">
+<h1>Welcome to CORK and BPR documentation!<a class="headerlink" href="#welcome-to-cork-and-bpr-documentation" title="Permalink to this headline">¶</a></h1>
+<p>The wiki
+<a class="reference external" href="http://www.corkobservatories.org/pmwiki/index.php">http://www.corkobservatories.org/pmwiki/index.php</a></p>
+<p>Unfortunately, the wiki site is not very well maintained in the moment.</p>
+<p>I do maintain a version controlled software repository that contains all the programs that you need to deal with CORKs and the downloaded data:
+<a class="reference external" href="http://corkobservatory.svn.sourceforge.net/viewvc/corkobservatory/">http://corkobservatory.svn.sourceforge.net/viewvc/corkobservatory/</a></p>
+<p>This repository is used to keep the computers that are used to download data updated and in sync. It also contains all calibration and site information (see CalibrationFiles) and the details of the instrument configurations (see ParameterFiles). If you want to contribute to that information, you need to install subversion (svn) to stay up to date and push new updates to the software repository. Or you can ask me to make the modifications. I also use the repository the maintain some documentation of the software that you can access here:
+<a class="reference external" href="http://corkobservatory.sourceforge.net/">http://corkobservatory.sourceforge.net/</a></p>
+<div class="toctree-wrapper compound">
+<span id="document-BeforeGoingToSea"></span><div class="toctree-wrapper compound">
+</div>
+<div class="section" id="before-youo-go-to-sea">
+<h2>Before youo go to sea<a class="headerlink" href="#before-youo-go-to-sea" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="make-sure-you-have-a-working-computer">
+<h3>Make sure you have a working computer<a class="headerlink" href="#make-sure-you-have-a-working-computer" title="Permalink to this headline">¶</a></h3>
+<p>A computer running Linux is the simplest platform to install and run the CORK software on.</p>
+<div class="section" id="verify-that-your-software-is-still-current">
+<span id="sect-verify-corkobservatory"></span><h4>Verify that your software is still current<a class="headerlink" href="#verify-that-your-software-is-still-current" title="Permalink to this headline">¶</a></h4>
+<p>[<a class="reference external" href="mailto:mheesema&#37;&#52;&#48;sciserv">mheesema<span>&#64;</span>sciserv</a> C-tools]$ svn log -r base:head</p>
+</div>
+</div>
+</div>
+<span id="document-FieldGuide"></span><div class="toctree-wrapper compound">
+</div>
+<div class="section" id="cork-and-bpr-field-guide">
+<h2>CORK and BPR Field Guide<a class="headerlink" href="#cork-and-bpr-field-guide" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="crib-sheets">
+<h3>Crib sheets<a class="headerlink" href="#crib-sheets" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="simple-health-check-and-download">
+<span id="sect-downloaddata"></span><h4>Simple health check and download<a class="headerlink" href="#simple-health-check-and-download" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic">
+<li><p class="first">Make sure laptop clock is synchronized (see <a class="reference internal" href="index.html#sect-sync-ntp"><em>Sync to NTP</em></a>)</p>
+</li>
+<li><p class="first">Create a working directory (see <a class="reference internal" href="index.html#sect-workingdir"><em>Setup working directory</em></a>)</p>
+</li>
+<li><p class="first">Connect instrument to computer (see <a class="reference internal" href="index.html#sect-instrumentconnection"><em>Connecting the Instrument</em></a>)</p>
+</li>
+<li><p class="first">Turn on communication and power <strong>after</strong> connection is established
+make sure power and comms are off before ODI connector is removed from
+parking position</p>
+</li>
+<li><p class="first">Run mlterm, making sure to use a reasonable log-file name (see <a class="reference internal" href="index.html#sect-starting-mlterm"><em>Starting mlterm</em></a>)</p>
+</li>
+<li><dl class="first docutils">
+<dt>Get instrument stats <tt class="docutils literal"><span class="pre">F</span></tt></dt>
+<dd><ol class="first last arabic simple">
+<li>Take note of clock drift (do <strong>not</strong> syncronize the clock, later on)</li>
+<li>Take note of predicted download times</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Get basic logger settings <tt class="docutils literal"><span class="pre">I</span></tt></dt>
+<dd><ol class="first last arabic simple">
+<li>Take note of download baud-rate (115200 for NEPTUNE instruments)</li>
+<li>Take note of control baud-rate  (115200 for NEPTUNE instruments)</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p class="first">Consider to increase download speed (see <a class="reference internal" href="index.html#sect-increasedownloadspeed"><em>Increase download speed</em></a>)</p>
+</li>
+<li><p class="first">Download data <tt class="docutils literal"><span class="pre">D</span></tt>, making sure to use a reasonable file name</p>
+</li>
+<li><p class="first">Get instrument stats <tt class="docutils literal"><span class="pre">F</span></tt> again</p>
+</li>
+<li><dl class="first docutils">
+<dt>Deploy instrument and quit <tt class="docutils literal"><span class="pre">Z</span></tt></dt>
+<dd><p class="first last">PI might suggests real-time monitoring while following next steps</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">Backup data (*.raw) to USB key  (see <a class="reference internal" href="index.html#sect-backupdata"><em>Backup data</em></a>)</p>
+</li>
+<li><dl class="first docutils">
+<dt>Check data integrity</dt>
+<dd><ol class="first last arabic">
+<li><dl class="first docutils">
+<dt>run <tt class="docutils literal"><span class="pre">mlbin</span> <span class="pre">xxxx.raw</span></tt></dt>
+<dd><p class="first last">strips off file system and generate xxxx.bin
+(there should be no errors)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>run <tt class="docutils literal"><span class="pre">dumpBin.py</span> <span class="pre">-a</span> <span class="pre">-n</span> <span class="pre">-t</span> <span class="pre">-s</span> <span class="pre">xxxx.bin</span> <span class="pre">&gt;</span> <span class="pre">xxxx.dmp</span></tt></dt>
+<dd><p class="first last">Does some integrity checking and creates ASCII dump</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>run <tt class="docutils literal"><span class="pre">tail</span> <span class="pre">xxxxx.dmp</span></tt> to see statistics</dt>
+<dd><p class="first last">Discuss with PI</p>
+</dd>
+</dl>
+</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p class="first">Contact PI and discuss whether to clear memory</p>
+</li>
+<li><p class="first">Backup *.log files and sent *.log and *.raw files to PI</p>
+</li>
+<li><p class="first">Make sure the communication and power lines are turned off <strong>before</strong>
+the under water mateable connector is disconnected.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="howto-s">
+<h3>Howto&#8217;s<a class="headerlink" href="#howto-s" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="linux">
+<h4>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h4>
+<p>Working with the <a class="reference internal" href="index.html#term-hp-mini"><em class="xref std std-term">HP-Mini</em></a> s that are used to download data from <a class="reference internal" href="index.html#term-cork"><em class="xref std std-term">CORK</em></a> s and <a class="reference internal" href="index.html#term-bpr"><em class="xref std std-term">BPR</em></a> s requires some basic Linux skills. This section provides some recipes for common tasks.</p>
+<div class="figure align-center" id="fig-linuxsession">
+<img alt="_images/LinuxScreenOverview.png" src="_images/LinuxScreenOverview.png" />
+<p class="caption">Linux session with terminal window.</p>
+</div>
+<div class="section" id="open-a-terminal-window">
+<span id="sect-openterminal"></span><h5>Open a terminal window<a class="headerlink" href="#open-a-terminal-window" title="Permalink to this headline">¶</a></h5>
+<p>Click on the terminal icon</p>
+<img alt="_images/ShellIcon.png" src="_images/ShellIcon.png" />
+<p>to open a command-line terminal window. If needed you can create tabs with additional terminals from the <tt class="docutils literal"><span class="pre">File</span></tt> menu.</p>
+</div>
+<div class="section" id="basic-linux-commands">
+<span id="sect-basiclinuxcommands"></span><h5>Basic Linux Commands<a class="headerlink" href="#basic-linux-commands" title="Permalink to this headline">¶</a></h5>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">pwd</span></tt></dt>
+<dd>Prints the current working directory</dd>
+<dt><tt class="docutils literal"><span class="pre">ls</span></tt></dt>
+<dd>Lists the files in the current directory. Use <tt class="docutils literal"><span class="pre">ls</span> <span class="pre">-lh</span></tt> to get more details about the files.</dd>
+<dt><tt class="docutils literal"><span class="pre">mkdir</span></tt></dt>
+<dd>Creates a new subdirectory (e.g. <tt class="docutils literal"><span class="pre">mkdir</span> <span class="pre">TestDirectory</span></tt>)</dd>
+<dt><tt class="docutils literal"><span class="pre">rm</span></tt></dt>
+<dd>Deletes specified files. <tt class="docutils literal"><span class="pre">rm</span> <span class="pre">-r</span></tt> also deletes directories. <strong>Careful</strong>, there is no way back!!!</dd>
+<dt><tt class="docutils literal"><span class="pre">cd</span></tt></dt>
+<dd>Change into specified directory. As with all other commands, pressing <tt class="docutils literal"><span class="pre">Tab</span></tt> does an auto-complete&#8211;try it!</dd>
+</dl>
+</div>
+<div class="section" id="setup-working-directory">
+<span id="sect-workingdir"></span><h5>Setup working directory<a class="headerlink" href="#setup-working-directory" title="Permalink to this headline">¶</a></h5>
+<p>Before you start to communicate with a CORK or BPR, create a working directory under <tt class="docutils literal"><span class="pre">/home/corks/Cruises</span></tt>
+or <tt class="docutils literal"><span class="pre">/home/corks/Tests</span></tt>&#8211;what ever seems more appropriate. If you are on a cruise you might
+consider creating subdirectories for individual instruments. In a terminal window change the
+directory to the working directory and execute <tt class="docutils literal"><span class="pre">cp</span> <span class="pre">/home/corks/corkobservatory/CalibrationFiles/\*.txt</span> <span class="pre">./</span></tt>
+to copy some calibration files into your working directory (see <a class="reference internal" href="index.html#sect-calibrationfiles"><em>mlterm calibration files</em></a>).
+Now, you&#8217;re all set to begin communication with the logger, data download, and post-processing.</p>
+<p>If all of this is not clear to you, you might want to read <a class="reference internal" href="index.html#sect-openterminal"><em>Open a terminal window</em></a>
+and <a class="reference internal" href="index.html#sect-basiclinuxcommands"><em>Basic Linux Commands</em></a> first.</p>
+</div>
+<div class="section" id="backup-data">
+<span id="sect-backupdata"></span><h5>Backup data<a class="headerlink" href="#backup-data" title="Permalink to this headline">¶</a></h5>
+<p>After downloading data from an instrument and before clearing the memory,
+make sure that you make at least one backup copy of the data is on a USB key.
+To make a backup follow these steps:</p>
+<ol class="arabic">
+<li><p class="first">Insert USB key (it will be mounted under /media)</p>
+</li>
+<li><p class="first">Find out the name/directory of the drive (<tt class="docutils literal"><span class="pre">ls</span> <span class="pre">/media</span></tt>)</p>
+</li>
+<li><p class="first">Copy files <tt class="docutils literal"><span class="pre">cp</span> <span class="pre">file1.raw</span> <span class="pre">[file2.log</span> <span class="pre">...]</span> <span class="pre">/media/nameOfUSB</span></tt> (<tt class="docutils literal"><span class="pre">cp</span> <span class="pre">-R</span></tt> let&#8217;s you copy directories recursively)</p>
+</li>
+<li><p class="first">Unmount USB key (click computer icon, hover over device&#8211;e.g. KINGSTON, click eject symbol)</p>
+<img alt="_images/UnmountUSB.png" src="_images/UnmountUSB.png" />
+</li>
+<li><p class="first">Now the eject symbol should have disappeared and you can safely remove the device</p>
+</li>
+</ol>
+</div>
+<div class="section" id="sync-to-ntp">
+<span id="sect-sync-ntp"></span><h5>Sync to NTP<a class="headerlink" href="#sync-to-ntp" title="Permalink to this headline">¶</a></h5>
+<ol class="arabic">
+<li><p class="first">Boot up the <a class="reference internal" href="index.html#term-hp-mini"><em class="xref std std-term">HP-Mini</em></a> and make sure that wireless networking is enabled (both LEDs on front are blue)
+if you do not have a cabled connection.</p>
+</li>
+<li><dl class="first docutils">
+<dt>Make sure you are connected to a network</dt>
+<dd><ol class="first last arabic">
+<li><p class="first">Hover over icon on the bottom tool bar (globe, or wireless signal) and check if eth0 (cable) or eth1 (wireless are connected)</p>
+<img alt="_images/NetworkStatus.png" src="_images/NetworkStatus.png" />
+</li>
+<li><p class="first">If no connection is up, click on the globe and connect to a network (e.g. TGT if you happen to be on the Thompson)</p>
+</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Open a terminal window and monitor the NTP log file (<tt class="docutils literal"><span class="pre">tail</span> <span class="pre">--follow</span> <span class="pre">/var/log/ntp</span></tt> &#8211; <tt class="docutils literal"><span class="pre">Ctrl-c</span></tt> to quit)</dt>
+<dd><ol class="first last arabic simple">
+<li>Look for <tt class="docutils literal"><span class="pre">synchronized</span> <span class="pre">to</span> <span class="pre">xxx.xxx.xxx.xxx,</span> <span class="pre">stratum</span> <span class="pre">?</span></tt> that happened within the last 30 min or so.</li>
+<li>If you do not see anything, try to restart NTP (<tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">/sbin/service</span> <span class="pre">ntp</span> <span class="pre">restart</span></tt> &#8211; you will need the root password)</li>
+<li>If after a few minutes you still do not see any signs of synchronization, you might have to <a class="reference internal" href="index.html#sect-setup-ntp"><em>Setup NTP</em></a></li>
+</ol>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+<div class="section" id="setup-ntp">
+<span id="sect-setup-ntp"></span><h5>Setup NTP<a class="headerlink" href="#setup-ntp" title="Permalink to this headline">¶</a></h5>
+<div class="admonition-todo admonition " id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">Add section about NTP setup</p>
+</div>
+</div>
+</div>
+<div class="section" id="instrument-setup">
+<h4>Instrument setup<a class="headerlink" href="#instrument-setup" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="connecting-the-instrument">
+<span id="sect-instrumentconnection"></span><h5>Connecting the Instrument<a class="headerlink" href="#connecting-the-instrument" title="Permalink to this headline">¶</a></h5>
+<p>Most modern CORKs and BPR have an RS-422 serial interface. We found that <a class="reference internal" href="index.html#term-moxa-uport"><em class="xref std std-term">Moxa UPort</em></a> USB-to-RS422 converters provide the most reliable connections.</p>
+</div>
+</div>
+<div class="section" id="mlterm">
+<h4>mlterm<a class="headerlink" href="#mlterm" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="starting-mlterm">
+<span id="sect-starting-mlterm"></span><h5>Starting mlterm<a class="headerlink" href="#starting-mlterm" title="Permalink to this headline">¶</a></h5>
+<p>Before running mlterm in a command-line terminal, make sure you are in a directory that is appropriately setup (see <a class="reference internal" href="index.html#sect-workingdir"><em>Setup working directory</em></a>). If you simply run <tt class="docutils literal"><span class="pre">mlterm</span></tt>, the session will be logged (appended) to a logfile named after the current date. It is advisable to use the <tt class="docutils literal"><span class="pre">-l</span> <span class="pre">myLogfile.log</span></tt> command-line option, to choose a descriptive name. On startup, mlterm tries all possible baudrates to connecte to the instrument. If the baudrate is known (115200 for all NEPTUNE instruments) the <tt class="docutils literal"><span class="pre">-b</span> <span class="pre">115200</span></tt> option provides a quicker initialization. As shown in <a class="reference internal" href="index.html#fig-linuxsession"><em>Linux session with terminal window.</em></a>, the instrument should wake up after a short period of time and after hitting <tt class="docutils literal"><span class="pre">Enter</span></tt> the high-level mlterm menu will be presented.</p>
+</div>
+<div class="section" id="increase-download-speed">
+<span id="sect-increasedownloadspeed"></span><h5>Increase download speed<a class="headerlink" href="#increase-download-speed" title="Permalink to this headline">¶</a></h5>
+<p>Start mlterm (see <a class="reference internal" href="index.html#sect-starting-mlterm"><em>Starting mlterm</em></a>) and from high-level menu proceed as follows:</p>
+<ol class="arabic simple">
+<li>Enter low-level mode by pressing <tt class="docutils literal"><span class="pre">P</span></tt> and <tt class="docutils literal"><span class="pre">Enter</span></tt></li>
+<li>Bring up MT01 menu <tt class="docutils literal"><span class="pre">Ctrl-s</span></tt></li>
+<li>Choose option to change download baudrate <tt class="docutils literal"><span class="pre">3</span></tt></li>
+<li>Choose appropriate download speed (most likely <tt class="docutils literal"><span class="pre">8</span></tt> 230400)</li>
+<li>Quit MT01 menu <tt class="docutils literal"><span class="pre">Q</span></tt></li>
+<li>Quit low-level interface <tt class="docutils literal"><span class="pre">Esc</span></tt></li>
+</ol>
+<p>Now, your are all set to start the download procedure.</p>
+<p>Note, the download baudrate will automatically be set to it&#8217;s default if you deploy the instrument by quitting mlterm with <tt class="docutils literal"><span class="pre">Z</span></tt> or after a timeout period of 30 minutes.</p>
+</div>
+</div>
+<div class="section" id="data-post-processing">
+<h4>Data post-processing<a class="headerlink" href="#data-post-processing" title="Permalink to this headline">¶</a></h4>
+<p>After downloading raw data from an instrument (see <a class="reference internal" href="index.html#sect-downloaddata"><em>Simple health check and download</em></a>) the data has to post-processed.</p>
+<p>First, mlbin has to be applied (<tt class="docutils literal"><span class="pre">mlbin</span> <span class="pre">filename.raw</span></tt>) to turn the *.raw file into a *.bin file. The *.raw files
+still contain the filesystem of the flash card and recovery information in case there were errors in the data transmission.
+mlbin strips off the filesystem and tries to fix any errors that might have occured. The *.bin file only contains data records
+in binary counts.</p>
+<p>mldat9 (<tt class="docutils literal"><span class="pre">mldat9</span> <span class="pre">filename.bin</span></tt>) is the standart utility to calibrate *.bin data and write the results into
+a *.dat ASCII file. In order to use mldat9 you have to cd into the directory with the *.bin file and make sure
+there is also a current set of calibration files in the directory (see <a class="reference internal" href="index.html#sect-workingdir"><em>Setup working directory</em></a>). While running mldat9
+you will be ask whether the temperatures are measured using a platinum sensor or a thermistor.
+Platinum sensors are mostly used in CORKs and BPRs installed past 2009 and have two-digit serial numbers, while
+themistors have one digit serial numbers. The serial numbers are shown in the sites.txt calibratrion file
+(see <a class="reference internal" href="index.html#sect-calibrationfiles"><em>mlterm calibration files</em></a>) and should be noted in the respective *.par file under
+<tt class="docutils literal"><span class="pre">~/corkobservatory/ParameterFiles</span></tt>. Furthermore, you are asked whether the Paroscientific gauge measures
+pressure and temperature or pressure only. If you do not know the answer you can lookup the gauge serial numbers
+that are mentionend in sites.txt in parosci.txt and check whether U0, Y1, Y2 are zero (pressure only) or non zeros
+(pressure and temperature). Then you have to select a data format
+(typically `` 4. Parosci temperature compensated pressure``) and a site description which is a line from the site.txt
+calibration file. The site description has the following format:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="20%" />
+<col width="17%" />
+<col width="19%" />
+<col width="16%" />
+<col width="15%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>number:</td>
+<td>description_rtcID</td>
+<td>deploymentMonth</td>
+<td>temperatureSerial</td>
+<td>parosciSerial</td>
+<td>parosciSerial</td>
+<td>...</td>
+</tr>
+<tr class="row-even"><td>3:</td>
+<td>1027C_89</td>
+<td>Jul10</td>
+<td>98</td>
+<td>120238</td>
+<td>120239</td>
+<td>...</td>
+</tr>
+</tbody>
+</table>
+<p>mldat9 automatically removes spikes from the paros pressure and temperature channels that get sometimes
+generated by the measurement system and is convinient to use, but it has certain limitations:</p>
+<ol class="arabic simple">
+<li>mldat9 has problems with partial records that can sometimes occur especially on systems that occasionally switch
+between battery and cabled mode.</li>
+<li>mldat9 cannot cope with instruments that have a mix between gauges that measure temperature and pressure and pressure
+only. These configurations exist especially for CORKs which have many gauges and are designed to operated in cabled
+mode.</li>
+</ol>
+<p>To cope with these problems two Python programs were developed that can be used instead of mldat9
+(see <a class="reference internal" href="index.html#sect-install-python"><em>Install dependencies for Python scripts</em></a>). The first script dumpBin.py can be used fix *.bin files by eliminating partial
+records, remove spikes, find problems, and dump the binary counts into an ASCII format that is human readable and can
+be calibrated using a calibrateLogfile.py.</p>
+<p>A common workflow to process <tt class="docutils literal"><span class="pre">filename.bin</span></tt> using these scripts would be:</p>
+<ol class="arabic simple">
+<li>Fix data problems using
+<tt class="docutils literal"><span class="pre">dumpBin.py</span> <span class="pre">-n</span> <span class="pre">-s</span> <span class="pre">-a</span> <span class="pre">-t</span> <span class="pre">-b</span> <span class="pre">filename_fixed.bin</span> <span class="pre">filename.bin</span> <span class="pre">&gt;</span> <span class="pre">filename.dmp</span></tt><ul>
+<li>filename_fixed.bin will contain all complete data records</li>
+<li>filename.dmp will contain ASCII representation of binary data and debugging information</li>
+</ul>
+</li>
+<li>Dump despiked data (only works with clean data) for calibration
+<a href="#id1"><span class="problematic" id="id2">``</span></a>dumpBin.py -d filename_fixed.bin &gt; filename_despiked.dmp</li>
+<li>Calibrate the data
+<tt class="docutils literal"><span class="pre">calibrateLogfile.py</span> <span class="pre">-c</span> <span class="pre">calibrationName</span> <span class="pre">filename_despiked.dmp</span> <span class="pre">&gt;</span> <span class="pre">filename_despiked.dat</span></tt><ul>
+<li>calibrateLogfile.py also works with data from stdin, so the last two steps can be combined using a pipe:
+<tt class="docutils literal"><span class="pre">dumpBin.py</span> <span class="pre">-d</span> <span class="pre">filename_fixed.bin</span> <span class="pre">|</span> <span class="pre">calibrateLogfile.py</span> <span class="pre">-c</span> <span class="pre">calibrationName</span> <span class="pre">&gt;</span> <span class="pre">filename_despiked.dat</span></tt></li>
+<li>Run <tt class="docutils literal"><span class="pre">calibrateLogfile.py</span> <span class="pre">-l</span></tt> to get a list of available calibrations. New calibrations can be
+defined in calibrateData.py.</li>
+</ul>
+</li>
+</ol>
+<p>Run <tt class="docutils literal"><span class="pre">dumpBin.py</span> <span class="pre">--help</span></tt> and <tt class="docutils literal"><span class="pre">calibrateLogfile.py</span> <span class="pre">--help</span></tt> to study all available the commandline options.</p>
+<div class="section" id="mlterm-calibration-files">
+<span id="sect-calibrationfiles"></span><h5>mlterm calibration files<a class="headerlink" href="#mlterm-calibration-files" title="Permalink to this headline">¶</a></h5>
+<p>There are three different calibration files:</p>
+<dl class="docutils">
+<dt>parosci.txt</dt>
+<dd>Calibration coefficients for Paroscientific pressure gauges</dd>
+<dt>platinum.txt</dt>
+<dd>Calibration coefficients for platinum housing temperature sensors</dd>
+<dt>therms.txt</dt>
+<dd>Calibration coefficient housing temperature thermistors</dd>
+<dt>sites.txt</dt>
+<dd><p class="first">Data base that associates deployment locations and times, logger IDs,
+and sensor IDs. This information is used for calibration routines.</p>
+<p class="last"><strong>Note</strong>, mldat and mlterm only support only up to 30 lines in sites.txt.</p>
+</dd>
+</dl>
+<div class="admonition-todo admonition " id="index-1">
+<p class="first admonition-title">Todo</p>
+<p class="last">Changed mldat (wrt2dat.c &#8211; DEFINE MAXSITES) to support sites.txt files with more than 30 lines. Add same functionality to mldat (formatdata.c) requires CORK simulator for testing...</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="glossary">
+<h3>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h3>
+<dl class="glossary docutils">
+<dt id="term-awq-bulkhead-connector">AWQ bulkhead connector</dt>
+<dd><p class="first">CORK pressure cases usually have an 6 pie AWQ bulkhead connector,
+that connects to an 7-pin ODI or SEACON underwater mateable connector.
+BPR pressure cases usually have an 2 piece AWQ bulkhead connector,
+that connects to a 7-pin ODI connector.</p>
+<img alt="_images/ODI_2_PieAWQ.jpg" class="align-center" src="_images/ODI_2_PieAWQ.jpg" style="width: 25%;" />
+<p class="last">ODI to two pie AWQ cable</p>
+</dd>
+<dt id="term-bpr">BPR</dt>
+<dd>Bottom Pressure Recorder</dd>
+<dt id="term-cork">CORK</dt>
+<dd>Circulation Obviation Retro-fit Kit</dd>
+<dt id="term-hp-mini">HP-Mini</dt>
+<dd><p class="first">There are four HP-Minis setup to do CORK and BPR downloads around the world.
+It is also possible to compile the communication software for Mac and there is
+an image for VirtualBox that makes it possible to run the software on a Linux virtual machine under windows.</p>
+<img alt="_images/HP-Mini.jpg" class="last align-center" src="_images/HP-Mini.jpg" style="width: 25%;" />
+</dd>
+<dt id="term-moxa-uport">Moxa UPort</dt>
+<dd><p class="first">The Moxa UPort USB-2-RS422 to adapter provides superior download speeds over other brands.
+Unfortunately, the driver only supports older versions of Linux. UPDATE: There is a new driver released in
+summer 2012. Also, Nic Scott mentioned wrapping Windows drivers under Linux</p>
+<img alt="_images/Moxa_UPort_RS-422.jpg" class="last align-center" src="_images/Moxa_UPort_RS-422.jpg" style="width: 25%;" />
+</dd>
+</dl>
+</div>
+</div>
+<span id="document-ComputerSetup"></span><div class="toctree-wrapper compound">
+</div>
+<div class="section" id="cork-computer-setup">
+<h2>CORK Computer Setup<a class="headerlink" href="#cork-computer-setup" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="required-software">
+<h3>Required software<a class="headerlink" href="#required-software" title="Permalink to this headline">¶</a></h3>
+<p>A computer running Linux is the simplest platform to install and run the CORK software on.
+It is also known to run on Mac computers and most data data processing can be done on Windows machines,
+but mlterm the programm used to communicate with CORKs and download the data does not work under windows
+and the necessary development environment to compile various C-programs might be challenging to setup on Mac.</p>
+<div class="section" id="check-out-the-cork-software-repository">
+<span id="sect-checkout-corkobservatory"></span><h4>Check out the CORK software repository<a class="headerlink" href="#check-out-the-cork-software-repository" title="Permalink to this headline">¶</a></h4>
+<p>CORK software, calibration and parameter files are maintainded at the
+<a class="reference external" href="https://sourceforge.net/projects/corkobservatory/">CORK Observatory Software Repository.</a></p>
+<p>It is best to have svn installed to check out the code. Check if svn is installed by running <tt class="docutils literal"><span class="pre">svn</span> <span class="pre">--help</span></tt>.
+If there is not help displayed you have to install svn e.g. by running <tt class="docutils literal"><span class="pre">sodu</span> <span class="pre">yum</span> <span class="pre">install</span> <span class="pre">subversion</span></tt>.</p>
+<p>Now, go into the home directory of the cork user (<tt class="docutils literal"><span class="pre">cd</span> <span class="pre">~</span></tt>) and run</p>
+<p><tt class="docutils literal"><span class="pre">svn</span> <span class="pre">co</span> <span class="pre">https://svn.code.sf.net/p/corkobservatory/code/</span> <span class="pre">corkobservatory</span></tt></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>SourceForge changed their naming scheme. Do <em>not</em> use the following anymore:
+<tt class="docutils literal"><span class="pre">svn</span> <span class="pre">co</span> <span class="pre">https://corkobservatory.svn.sourceforge.net/svnroot/corkobservatory</span> <span class="pre">corkobservatory</span></tt></p>
+<p>If you are stuck at revision 65 after update
+Updated to revision 65.</p>
+<p><tt class="docutils literal"><span class="pre">svn</span> <span class="pre">info</span></tt>
+URL: <a class="reference external" href="https://corkobservatory.svn.sourceforge.net/svnroot/corkobservatory">https://corkobservatory.svn.sourceforge.net/svnroot/corkobservatory</a></p>
+<p><tt class="docutils literal"><span class="pre">svn</span> <span class="pre">switch</span> <span class="pre">--relocate</span> <span class="pre">https://corkobservatory.svn.sourceforge.net/svnroot/corkobservatory</span> <span class="pre">https://svn.code.sf.net/p/corkobservatory/code/</span></tt></p>
+<p class="last">After update revision should be greater than
+Revision: 73</p>
+</div>
+<p>This will create a <tt class="docutils literal"><span class="pre">corkobservatory</span></tt> directory that contains program source codes, calibration information, etc.
+To update these files to the latest version you can cd into the <tt class="docutils literal"><span class="pre">corkobservatory</span></tt> directory and run <tt class="docutils literal"><span class="pre">svn</span> <span class="pre">update</span></tt> at any time
+when you have an internet connection.</p>
+</div>
+<div class="section" id="compile-and-install-mlterm-mlbin-mldat9">
+<h4>Compile and install mlterm, mlbin, mldat9<a class="headerlink" href="#compile-and-install-mlterm-mlbin-mldat9" title="Permalink to this headline">¶</a></h4>
+<p><tt class="docutils literal"><span class="pre">mlterm</span></tt>, <tt class="docutils literal"><span class="pre">mlbin</span></tt> and <tt class="docutils literal"><span class="pre">mldat9</span></tt> are the core utilities (programmed in C) to setup CORKs and download the data, strip unneccessary
+filesystem information from the downloaded <a href="#id1"><span class="problematic" id="id2">*</span></a>.raw files, and to calibrate the data contained in the <a href="#id3"><span class="problematic" id="id4">*</span></a>.bin files, respectively.
+In some special cases, when there are problems with data consistency or with special instrument setups you need to use
+some Python scripts, that will be discussed later, instead of mldat9.</p>
+<p>Since the core utilities are supplied as C source code, you need to have a C-compiler and basic development tools installed.
+cd into the <tt class="docutils literal"><span class="pre">mlterm</span></tt>, <tt class="docutils literal"><span class="pre">mlbin</span></tt>, and <tt class="docutils literal"><span class="pre">mldat</span></tt> directories under <tt class="docutils literal"><span class="pre">~/corkobservatory/C-tools</span></tt> and run</p>
+<ol class="arabic simple">
+<li>make</li>
+<li>sudo make install</li>
+</ol>
+<p>in each directory to compile and install the programs individually.</p>
+<p>NOTE: there is also a variant of mlterm <tt class="docutils literal"><span class="pre">mlterm_vpn</span></tt> that gets automatically installed with mlterm that is for use with
+instruments connected over connections with high latency (e.g. TCP/IP, VPN,...).</p>
+</div>
+<div class="section" id="install-rs-422-adapter-driver-if-necessary">
+<h4>Install RS-422 adapter driver if necessary<a class="headerlink" href="#install-rs-422-adapter-driver-if-necessary" title="Permalink to this headline">¶</a></h4>
+<p>Many USB/RS-422 adapters run under Linux out of the box, but the <a class="reference internal" href="index.html#term-moxa-uport"><em class="xref std std-term">Moxa UPort</em></a>-1130, which we found is the
+most reliable adapter, requires the compilation/installation of a seperate driver. We had problems in the past, because the
+driver was not compatible with current Linux distributions, but fortunately, Moxa did update the driver in summer 2012.</p>
+<p>So if you want to use a Moxa adapter make sure to download and install the latest diver either from their
+<a class="reference external" href="http://www.moxa.com/support/download.aspx?type=support&amp;id=776">website</a> or use the copy that is stored in the software repository
+(<tt class="docutils literal"><span class="pre">~/corkobservatory/ComputerSetup/drivers/MoxaUPort</span></tt>). Follow the instructions in the <tt class="docutils literal"><span class="pre">readme.txt</span></tt> file under &#8220;Module driver configuration&#8221;.</p>
+<p>If the driver install succeeded running <tt class="docutils literal"><span class="pre">mlterm</span></tt> with the Moxa UPort plugged into a USB port should start an mlterm
+session with mlterm trying to connect to the instrument. If the adapter is not recognized by the OS mlterm will fail
+with the following message:</p>
+<p><tt class="docutils literal"><span class="pre">/dev/ttyUSB0:</span> <span class="pre">No</span> <span class="pre">such</span> <span class="pre">file</span> <span class="pre">or</span> <span class="pre">directory</span></tt></p>
+</div>
+<div class="section" id="install-dependencies-for-python-scripts">
+<span id="sect-install-python"></span><h4>Install dependencies for Python scripts<a class="headerlink" href="#install-dependencies-for-python-scripts" title="Permalink to this headline">¶</a></h4>
+<p>The Python scripts need</p>
+<ol class="arabic simple">
+<li>Python (tested with 2.6 and 2.7)</li>
+<li>numpy</li>
+<li>matplotlib (optionally for plotting)</li>
+</ol>
+<p>So first check if Python is already installed <tt class="docutils literal"><span class="pre">python</span> <span class="pre">--version</span></tt> and install it with e.g.
+<tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">yum</span> <span class="pre">install</span> <span class="pre">python</span></tt> if not. Now you can try to install the numpy and matplotlib packages
+of your distribution e.g.:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">yum</span> <span class="pre">install</span> <span class="pre">python-numpy</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">yum</span> <span class="pre">install</span> <span class="pre">python-matplotlib</span></tt></li>
+</ul>
+<p>or install easy_install e.g. <tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">yum</span> <span class="pre">install</span> <span class="pre">python-setuptools</span></tt> and then run:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">easy_install</span> <span class="pre">numpy</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">easy_install</span> <span class="pre">matplotlib</span></tt></li>
+</ul>
+<p>Now, cd into the <tt class="docutils literal"><span class="pre">~/corkobservatory/ComputerSetup/scripts</span></tt>  directory
+(see  <a class="reference internal" href="index.html#sect-checkout-corkobservatory"><em>Check out the CORK software repository</em></a> for how to set it up) and run <tt class="docutils literal"><span class="pre">./createPythonToolsSymLinks.bash</span></tt> to add
+symbolic links to the python scripts <tt class="docutils literal"><span class="pre">dumpBin.py</span></tt> and <tt class="docutils literal"><span class="pre">calibrateLogfile.py</span></tt> to your path. If everything worked out,
+running <tt class="docutils literal"><span class="pre">dumpBin.py</span> <span class="pre">--help</span></tt> and <tt class="docutils literal"><span class="pre">calibrateLogfile.py</span> <span class="pre">--help</span></tt> will display the respective help information.</p>
+</div>
+</div>
+</div>
+<span id="document-Manpages"></span><div class="section" id="manpages">
+<h2>Manpages<a class="headerlink" href="#manpages" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>Usage: mlterm [OPTION] ... [DEVICE]
+  Options:
+    -b BAUDRATE     baudrate for terminal (should match instrument) deflt: 19200
+    -C              Clear memory
+    -d FILENAME     debug output file
+    -D FILENAME     Download data to raw output file
+    -p FILENAME     parameter error output file (companion to -W)
+    -F              Full status report
+    -G FILENAME     Get eerom and output to parameter file
+    -h              display this help and exit
+    -l FILENAME     log output file
+    -M FILENAME     Metadata (and naked eerom) to  output file
+    -n HOST[:PORT]  host (and optional network port; default is 4001) for 
+                    networked serial device
+    -W FILENAME     Write parameter input file to instrument eerom
+    -I              Initial status report
+    -P              low level (Pass-thru) mlterm for advanced users
+    -R              Recover communications
+    -s SITENAME     name as in sites.txt to format data (companion to -U)
+    -Y              sYnchronize instrument clock time
+    -U COUNT        display data in engineering Units for COUNT samples
+                    enter '' to display til ESC
+    -v              verbose output to screen and log file
+  DEVICE is the serial port device file; default is /dev/ttyUSB0
+</pre>
+</div>
+<div class="highlight-python"><pre>Usage: dumpBin.py [options] bin_files
+
+This script processes ML-CORK bin files
+
+Options:
+  -h, --help            show this help message and exit
+  -I RTC_ID, --RTC_ID=RTC_ID
+                        Force RTC ID #. Supply id as hex integer (e.g. 0x8C).
+                        Default: 5th byte in file
+  -c NCHANNELS, --n_channels=NCHANNELS
+                        Force number of paro channels
+  -n, --no_stats        Skip stats--they can take some time and generate some
+                        clutter
+  -s, --spaces          
+  -a, --print_all       
+  -p, --plot_data       Plots the data. May not work if you do not have the
+                        right libaries installed
+  -i, --info_only       Just output statistics (and plot, optionally) and not
+                        the actual data
+  -o, --old_ML-CORK     Assume data is from an old ML-CORK where the readings
+                        do not end with 0x00
+  -t, --timestamps      Print calibrated timestamps on every line emulating NC
+                        logfiles, at the same time.
+  -f TIMESTAMPFMT, --timestampFMT=TIMESTAMPFMT
+                        Modify timestamp format defaults is '%Y%m%d %H:%M:%S'.
+                        Use -f '%Y%m%dT%H%M%S.000Z' to emulate NEPTUNE Canada
+                        log files.
+  -d, --despike         Remove detected spikes by inserting linear
+                        interpolation.
+  -b BINARYFILE, --binary_file=BINARYFILE
+                        Safe a binary file skipping problematic records
+
+Examples:
+</pre>
+</div>
+<div class="highlight-python"><pre>Usage: calibrateLogfile.py [options] logfile.log
+
+This script find raw data in mlterm logfiles and calibrates it
+
+Options:
+  -h, --help            show this help message and exit
+  -c CALIBRATION, --calibration=CALIBRATION
+                        Name of calibration defined in calibrateData.py
+                        (required)
+  -s, --skip_length_check
+                        Skip the check whether the number of calibrated value
+                        equals the number of               binary input
+                        fields. Use this e.g. for 1362B where one existing
+                        channel               contains garbage and is not
+                        used...
+</pre>
+</div>
+</div>
+<span id="document-Todos"></span><div class="section" id="todos">
+<h2>Todos<a class="headerlink" href="#todos" title="Permalink to this headline">¶</a></h2>
+<div class="admonition-todo admonition " id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">Add section about NTP setup</p>
+</div>
+<p class="todo-source">(The <a class="reference internal" href="index.html#index-0"><em>original entry</em></a> is located in  C:\Users\Martin\Documents\Instruments\CORKs\corkobservatory\Documentation\src\FieldGuide.rst, line 156.)</p>
+<div class="admonition-todo admonition " id="index-1">
+<p class="first admonition-title">Todo</p>
+<p class="last">Changed mldat (wrt2dat.c &#8211; DEFINE MAXSITES) to support sites.txt files with more than 30 lines. Add same functionality to mldat (formatdata.c) requires CORK simulator for testing...</p>
+</div>
+<p class="todo-source">(The <a class="reference internal" href="index.html#index-1"><em>original entry</em></a> is located in  C:\Users\Martin\Documents\Instruments\CORKs\corkobservatory\Documentation\src\FieldGuide.rst, line 281.)</p>
+</div>
+<span id="document-PythonCode"></span><div class="section" id="module-calibrateData">
+<span id="python-modules"></span><h2>Python modules<a class="headerlink" href="#module-calibrateData" title="Permalink to this headline">¶</a></h2>
+<p>Basic functions needed to calibrate ML-CORK / BPR data.</p>
+<p>More text to describe what&#8217;s going on</p>
+<dl class="function">
+<dt id="calibrateData.calibratePPCTime">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">calibratePPCTime</tt><big>(</big><em>xt=709763880</em><big>)</big><a class="reference internal" href="_modules/calibrateData.html#calibratePPCTime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#calibrateData.calibratePPCTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="calibrateData.calibrateParoP">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">calibrateParoP</tt><big>(</big><em>xFP</em>, <em>Coeffs=None</em>, <em>xFT=None</em>, <em>Temp=None</em><big>)</big><a class="reference internal" href="_modules/calibrateData.html#calibrateParoP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#calibrateData.calibrateParoP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="calibrateData.calibrateParoT">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">calibrateParoT</tt><big>(</big><em>xFT</em>, <em>Coeffs=None</em><big>)</big><a class="reference internal" href="_modules/calibrateData.html#calibrateParoT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#calibrateData.calibrateParoT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calibrate temperatures from Paroscientifc Type-II gauges.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="calibrateData.calibratePlatinum">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">calibratePlatinum</tt><big>(</big><em>xT</em>, <em>Coeffs=None</em>, <em>ID=None</em><big>)</big><a class="reference internal" href="_modules/calibrateData.html#calibratePlatinum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#calibrateData.calibratePlatinum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calibrate temperatures from platinum chip sensors.</p>
+<p>The conversion from A/D counts to temperatures in degC is a simple linear relation ship.</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">T = a \cdot x + b</tt>)</p>
+latex exited with error:
+[stderr]
+latex: Unknown archive file size.
+latex: Data: unicode
+
+[stdout]
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8)
+entering extended mode
+(c:\users\martin\appdata\local\temp\tmpjwjxpn\math.tex
+LaTeX2e &lt;2009/09/24&gt;
+Babel &lt;v3.8l&gt; and hyphenation patterns for english, dumylang, nohyphenation, ge
+rman, ngerman, german-x-2009-06-19, ngerman-x-2009-06-19, french, loaded.
+(&#8220;C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\article.cls&#8221;
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+(&#8220;C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\size12.clo&#8221;))
+(&#8220;C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\inputenc.sty&#8221;
+======================================================================
+starting package maintenance...
+installation directory: C:\Users\Martin\AppData\Roaming\MiKTeX\2.8
+package repository: http://www.math.washington.edu/tex-archive/systems/win32/miktex/tm/packages/
+lightweight database digest: b6a72ef7e7a8ad90425ddc3013bfa35e
+======================================================================
+
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.131 \endinput
+               
+No pages of output.
+Transcript written on math.log.
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="calibrateData.calibrateThermistor">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">calibrateThermistor</tt><big>(</big><em>xR</em>, <em>Coeffs=None</em>, <em>ID=None</em><big>)</big><a class="reference internal" href="_modules/calibrateData.html#calibrateThermistor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#calibrateData.calibrateThermistor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calibrate temperatures from thermistor.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="calibrateData.calibrate_1026B">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">calibrate_1026B</tt><big>(</big><em>Raw=[11994032, 1736812215, 1753391814]</em><big>)</big><a class="reference internal" href="_modules/calibrateData.html#calibrate_1026B"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#calibrateData.calibrate_1026B" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calibration for the NC 1026B CORK</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="calibrateData.calibrate_1027C">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">calibrate_1027C</tt><big>(</big><em>Raw=[5925652, 2199430082L, 2163066709L]</em><big>)</big><a class="reference internal" href="_modules/calibrateData.html#calibrate_1027C"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#calibrateData.calibrate_1027C" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calibration for the setup (SR-2B with new gauges) 
+deployed external to CORK in 1027C in Summer 2011, attached with umbilical</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="calibrateData.calibrate_857D">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">calibrate_857D</tt><big>(</big><em>Raw=[4547430, 2171517024L, 2182222185L]</em><big>)</big><a class="reference internal" href="_modules/calibrateData.html#calibrate_857D"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#calibrateData.calibrate_857D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calibration for the 857D Middle Valley piggyback instrument</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="calibrateData.calibrate_858G">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">calibrate_858G</tt><big>(</big><em>Raw=[4547430, 708836726, 2161941373L, 708836726, 2161941373L]</em><big>)</big><a class="headerlink" href="#calibrateData.calibrate_858G" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calibration for the 858G Middle Valley replacement reCORKed in May 2013.
+Output: T_Pt, P_S1, P_Sf, T_S1, T_Sf</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="calibrateData.calibrate_Barkley_BPR78">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">calibrate_Barkley_BPR78</tt><big>(</big><em>Raw=[11627636, 743177769, 2060680196]</em><big>)</big><a class="reference internal" href="_modules/calibrateData.html#calibrate_Barkley_BPR78"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#calibrateData.calibrate_Barkley_BPR78" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="calibrateData.calibrate_DoNet1">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">calibrate_DoNet1</tt><big>(</big><em>Raw=[6068887, 741081220, 2172977017L, 2172525574L, 2153115213L, 2121447476]</em><big>)</big><a class="reference internal" href="_modules/calibrateData.html#calibrate_DoNet1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#calibrateData.calibrate_DoNet1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calibration for NanTroSEIZE C02 CORK</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="calibrateData.calibrate_DoNet2_OtherGauges">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">calibrate_DoNet2_OtherGauges</tt><big>(</big><em>Raw=[6008878, 741271410, 2172985505L, 2172512813L, 2145168051, 2121430965]</em><big>)</big><a class="reference internal" href="_modules/calibrateData.html#calibrate_DoNet2_OtherGauges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#calibrateData.calibrate_DoNet2_OtherGauges" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="calibrateData.calibrate_Endeavour_BPR83">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">calibrate_Endeavour_BPR83</tt><big>(</big><em>Raw=[6471937, 708836726, 2161941373L]</em><big>)</big><a class="reference internal" href="_modules/calibrateData.html#calibrate_Endeavour_BPR83"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#calibrateData.calibrate_Endeavour_BPR83" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="calibrateData.calibrate_Folger_BPR201107">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">calibrate_Folger_BPR201107</tt><big>(</big><em>Raw=[5128065, 718440432, 2158355974L]</em><big>)</big><a class="reference internal" href="_modules/calibrateData.html#calibrate_Folger_BPR201107"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#calibrateData.calibrate_Folger_BPR201107" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="calibrateData.calibrate_HeissCalib">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">calibrate_HeissCalib</tt><big>(</big><em>Raw=[6159243, 692484443, 2131853000]</em><big>)</big><a class="reference internal" href="_modules/calibrateData.html#calibrate_HeissCalib"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#calibrateData.calibrate_HeissCalib" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="calibrateData.calibrate_JFast">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">calibrate_JFast</tt><big>(</big><em>Raw=[5965668, 710927413, 2105924590, 720840165, 2167634962L, 707618831, 2170619802L]</em><big>)</big><a class="reference internal" href="_modules/calibrateData.html#calibrate_JFast"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#calibrateData.calibrate_JFast" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calibration for the 2012 JFast setup</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="calibrateData.calibrate_KEMO_BPR06">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">calibrate_KEMO_BPR06</tt><big>(</big><em>Raw=[5269341, 2160603186L]</em><big>)</big><a class="reference internal" href="_modules/calibrateData.html#calibrate_KEMO_BPR06"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#calibrateData.calibrate_KEMO_BPR06" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="calibrateData.calibrate_NCHR_BPR8C">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">calibrate_NCHR_BPR8C</tt><big>(</big><em>Raw=[4917899, 2221701693L]</em><big>)</big><a class="reference internal" href="_modules/calibrateData.html#calibrate_NCHR_BPR8C"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#calibrateData.calibrate_NCHR_BPR8C" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="calibrateData.calibrate_NT_C10_SmartPlug">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">calibrate_NT_C10_SmartPlug</tt><big>(</big><em>Raw=[5111502, 710297371, 2165241587L, 2141217326]</em><big>)</big><a class="reference internal" href="_modules/calibrateData.html#calibrate_NT_C10_SmartPlug"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#calibrateData.calibrate_NT_C10_SmartPlug" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="calibrateData.calibrate_U1362A">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">calibrate_U1362A</tt><big>(</big><em>Raw=[5908710, 2159359656L, 2233473579L, 2112889090]</em><big>)</big><a class="reference internal" href="_modules/calibrateData.html#calibrate_U1362A"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#calibrateData.calibrate_U1362A" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calibration for the U1362A (SR2A) setup as it was in stalled on IODP Exp 327
+in Jul 2010</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="calibrateData.calibrate_U1362B">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">calibrate_U1362B</tt><big>(</big><em>Raw=[4740228, 681524504, 2138749542, 2207002754L, 0, 2135957100]</em><big>)</big><a class="reference internal" href="_modules/calibrateData.html#calibrate_U1362B"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#calibrateData.calibrate_U1362B" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calibration for the U1362B (initially 1027C) setup as it was in stalled on IODP Exp 327
+in Jul 2010. The Screen #3 gauge was just unplugged =&gt; crosstalk garbage.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="calibrateData.calibrate_U1364A">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">calibrate_U1364A</tt><big>(</big><em>Raw=[5590666, 717083323, 2190506663L, 2166733706L, 2127403171, 2207142752L, 2128115585]</em><big>)</big><a class="reference internal" href="_modules/calibrateData.html#calibrate_U1364A"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#calibrateData.calibrate_U1364A" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calibration for IODP U1364A data.</p>
+<p>Here are the results of an example calibration:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">calibrate_U1364A</span><span class="p">(</span><span class="n">Raw</span><span class="o">=</span><span class="p">[</span><span class="mi">5590666</span><span class="p">,</span> <span class="mi">717083323</span><span class="p">,</span> <span class="mi">2190506663</span><span class="p">,</span> <span class="mi">2166733706</span><span class="p">,</span> <span class="mi">2127403171</span><span class="p">,</span> <span class="mi">2207142752</span><span class="p">,</span> <span class="mi">2128115585</span><span class="p">])</span>
+<span class="go">[23.626078129440003, 22.276150361949441, 11.103497907947677, 10.510306334848947, 522.67979987438071, -517.29555399981541, 11.071455420816344]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="calibrateData.getParoCoeffs">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">getParoCoeffs</tt><big>(</big><em>ID=None</em><big>)</big><a class="reference internal" href="_modules/calibrateData.html#getParoCoeffs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#calibrateData.getParoCoeffs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="calibrateData.getParoIdList">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">getParoIdList</tt><big>(</big><big>)</big><a class="headerlink" href="#calibrateData.getParoIdList" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="calibrateData.getPlatinumCoeffs">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">getPlatinumCoeffs</tt><big>(</big><em>ID=None</em><big>)</big><a class="reference internal" href="_modules/calibrateData.html#getPlatinumCoeffs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#calibrateData.getPlatinumCoeffs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="calibrateData.getThermistorCoeffs">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">getThermistorCoeffs</tt><big>(</big><em>ID=None</em><big>)</big><a class="reference internal" href="_modules/calibrateData.html#getThermistorCoeffs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#calibrateData.getThermistorCoeffs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="calibrateData.readParoCoeffs">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">readParoCoeffs</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/calibrateData.html#readParoCoeffs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#calibrateData.readParoCoeffs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read coeff from parosci.txt file.</p>
+<p>These coeffs are used later on</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="calibrateData.readPlatinumCoeffs">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">readPlatinumCoeffs</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/calibrateData.html#readPlatinumCoeffs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#calibrateData.readPlatinumCoeffs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="calibrateData.readSites">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">readSites</tt><big>(</big><big>)</big><a class="headerlink" href="#calibrateData.readSites" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read information from sites.txt file.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="calibrateData.readThermistorCoeffs">
+<tt class="descclassname">calibrateData.</tt><tt class="descname">readThermistorCoeffs</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/calibrateData.html#readThermistorCoeffs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#calibrateData.readThermistorCoeffs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<span class="target" id="module-calibrateLogfile"></span><dl class="function">
+<dt id="calibrateLogfile.parseCMDOpts">
+<tt class="descclassname">calibrateLogfile.</tt><tt class="descname">parseCMDOpts</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/calibrateLogfile.html#parseCMDOpts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#calibrateLogfile.parseCMDOpts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<span class="target" id="module-dumpBin"></span><dl class="function">
+<dt id="dumpBin.calCoeffs">
+<tt class="descclassname">dumpBin.</tt><tt class="descname">calCoeffs</tt><big>(</big><em>loggerID</em><big>)</big><a class="reference internal" href="_modules/dumpBin.html#calCoeffs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dumpBin.calCoeffs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dumpBin.getStatistics">
+<tt class="descclassname">dumpBin.</tt><tt class="descname">getStatistics</tt><big>(</big><em>Data</em>, <em>loggerID=None</em>, <em>do_plots=False</em>, <em>interp_spikes=False</em><big>)</big><a class="reference internal" href="_modules/dumpBin.html#getStatistics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dumpBin.getStatistics" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dumpBin.parseCMDOpts">
+<tt class="descclassname">dumpBin.</tt><tt class="descname">parseCMDOpts</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/dumpBin.html#parseCMDOpts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dumpBin.parseCMDOpts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dumpBin.readBinFile">
+<tt class="descclassname">dumpBin.</tt><tt class="descname">readBinFile</tt><big>(</big><em>binFileName='1027C_Weekend.bin'</em><big>)</big><a class="reference internal" href="_modules/dumpBin.html#readBinFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dumpBin.readBinFile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dumpBin.recordLength">
+<tt class="descclassname">dumpBin.</tt><tt class="descname">recordLength</tt><big>(</big><em>Data</em>, <em>loggerID=None</em><big>)</big><a class="reference internal" href="_modules/dumpBin.html#recordLength"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dumpBin.recordLength" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dumpBin.stripTrash">
+<tt class="descclassname">dumpBin.</tt><tt class="descname">stripTrash</tt><big>(</big><em>Data</em><big>)</big><a class="reference internal" href="_modules/dumpBin.html#stripTrash"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dumpBin.stripTrash" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="genindex.html"><em>Index</em></a>
+<a class="reference internal" href="py-modindex.html"><em>Module Index</em></a>
+<a class="reference internal" href="search.html"><em>Search Page</em></a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="index.html#document-index">CORK and BPR documentation 0.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Martin Heesemann.
+    </div>
+  </body>
+</html>
