@@ -31,9 +31,23 @@ Now, go into the home directory of the cork user (``cd ~``) and run
 
 ``svn co https://svn.code.sf.net/p/corkobservatory/code/ corkobservatory``
 
-Note: SourceForge changed their naming scheme. Do *not* use the following anymore:
-``svn co https://corkobservatory.svn.sourceforge.net/svnroot/corkobservatory corkobservatory``
+.. note::
 
+    SourceForge changed their naming scheme. Do *not* use the following anymore:
+    ``svn co https://corkobservatory.svn.sourceforge.net/svnroot/corkobservatory corkobservatory``
+
+    If you are stuck at revision 65 after update
+    Updated to revision 65.
+
+
+    ``svn info``
+    URL: https://corkobservatory.svn.sourceforge.net/svnroot/corkobservatory
+
+
+    ``svn switch --relocate https://corkobservatory.svn.sourceforge.net/svnroot/corkobservatory https://svn.code.sf.net/p/corkobservatory/code/``
+
+    After update revision should be greater than 
+    Revision: 73
 
 This will create a ``corkobservatory`` directory that contains program source codes, calibration information, etc.
 To update these files to the latest version you can cd into the ``corkobservatory`` directory and run ``svn update`` at any time 
