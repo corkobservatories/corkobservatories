@@ -86,5 +86,8 @@ A2      A2
 slope   -3.22267e-006
 intrcpt 43.9479
 A3      A3
-slope   -3.22235e-006
-intrcpt 43.7588
+slope   -2.93721e-006
+intrcpt 39.8867
+AA      AA
+slope   -2.928e-006
+intrcpt 39.904
