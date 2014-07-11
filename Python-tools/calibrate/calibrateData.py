@@ -332,7 +332,9 @@ def calibrate_U1362B(Raw=[0x485484, 0x289F3D18, 0x7F7ABA66, 0x838C3082, 0x000000
 
 def calibrate_1027C(Raw=[0x5A6B14, 0x8318A3C2, 0x80EDC755]):
     """Calibration for the setup (SR-2B with new gauges) 
-    deployed external to CORK in 1027C in Summer 2011, attached with umbilical
+    deployed external to CORK in 1027C in Summer 2011, attached with umbilical.
+	
+	The seafloor pressure gauge failed and the instrument is supposed to be replaced in Jul 2014.
     """
     RTC_ID=0x89
     Out=[]
@@ -358,7 +360,7 @@ def calibrate_857D(Raw=[0x456366, 0x816EB860, 0x82121169]):
     return Out
 
 def calibrate_858G(Raw=[0x456366, 0x2A3FFD76, 0x80DC9B7D,0x2A3FFD76, 0x80DC9B7D]):
-    """Calibration for the 858G Middle Valley replacement reCORKed in May 2013.
+    """Calibration for the 858G Middle Valley replacement which could *not* be installed in May 2013.
        Output: T_Pt, P_S1, P_Sf, T_S1, T_Sf
     """
     RTC_ID=0xBC
@@ -373,6 +375,23 @@ def calibrate_858G(Raw=[0x456366, 0x2A3FFD76, 0x80DC9B7D,0x2A3FFD76, 0x80DC9B7D]
     Out.append(calibrateParoT(Raw[4],Coeffs=CP_SF))
     return Out
 
+def calibrate_1027C_2014(Raw=[0x456366, 0x2A3FFD76, 0x80DC9B7D,0x2A3FFD76, 0x80DC9B7D]):
+    """Calibration for 1027C replacement to be installed in Jul 2014. 
+		Was initially meant for the 858G Middle Valley replacement which could *not* be installed in May 2013.
+       Output: T_Pt, P_S1, P_Sf, T_S1, T_Sf
+    """
+    RTC_ID=0xBC
+    Out=[]
+    CP_SF=getParoCoeffs(125834)
+    CP_S1=getParoCoeffs(125833)
+    CT_Ti=getPlatinumCoeffs(0x9B)
+    Out.append(calibratePlatinum(Raw[0],Coeffs=CT_Ti))
+    Out.append(calibrateParoP(Raw[1],Coeffs=CP_S1,xFT=Raw[3]))
+    Out.append(calibrateParoP(Raw[2],Coeffs=CP_SF,xFT=Raw[4]))
+    Out.append(calibrateParoT(Raw[3],Coeffs=CP_S1))
+    Out.append(calibrateParoT(Raw[4],Coeffs=CP_SF))
+    return Out
+	
 def calibrate_1026B(Raw=[0xB703B0, 0x6785A6B7, 0x6882A2C6]):
     """Calibration for the NC 1026B CORK
     """
