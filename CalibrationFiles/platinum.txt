@@ -1,3 +1,6 @@
+00      00
+slope   -0.0e-006
+intrcpt 00.0000
 81      81
 slope   -2.93721e-006
 intrcpt 39.9656
