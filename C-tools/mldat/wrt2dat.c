@@ -11,6 +11,11 @@
 // Maximum number of sites in sites.txt
 #define MAXSITES 100
 
+// Maximum number of Paros Gauges in parosci.txt
+#define MAXGAUGES 500
+
+
+
 int initialize_vals(int therm);
 int getint (int min, int max);
 double getfloat (void);
@@ -29,7 +34,7 @@ double calipress(double temperature, double pper, int i);
 extern char *trim (char *buf);
 
 extern int kfd;
-static long int SNA[100]; // All the serial numbers. Actual serial numbers to be applied in calibration are SNA[SNi]
+static long int SNA[MAXGAUGES]; // All the serial numbers. Actual serial numbers to be applied in calibration are SNA[SNi]
 static char tSNA[100][3];
 extern int tform;
 extern int format;
@@ -46,8 +51,8 @@ static double slope[100],intercept[100];
 //therm coeffs:
 double A[100],B[100],C[100],X1[100],X2[100],X3[100], X4[100], X5[100],X6[100];
 //parosci coeffs:
-static double U0[100],Y1[100],Y2[100],C1[100],C2[100],C3[100];
-static double D1[100],T1[100],T2[100],T3[100],T4[100];
+static double U0[MAXGAUGES],Y1[MAXGAUGES],Y2[MAXGAUGES],C1[MAXGAUGES],C2[MAXGAUGES],C3[MAXGAUGES];
+static double D1[MAXGAUGES],T1[MAXGAUGES],T2[MAXGAUGES],T3[MAXGAUGES],T4[MAXGAUGES];
 
 void wrt2dat(FILE *pW, long time0, unsigned long temp,
 	unsigned long pp[][2], int ns, int therm)
