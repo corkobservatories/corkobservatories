@@ -11,7 +11,7 @@ https://github.com/corkobservatories/corkobservatories/releases
 
 For windows, make sure you keep the cygwin.dll with the exe files.
 
-=== All operating systems
+## All operating systems
 
 To calibrate raw readings and output engenering units, mldat and mlbin rely on the \*.txt files that can be downloaded from the repository: https://github.com/corkobservatories/corkobservatories/tree/master/CalibrationFiles
 
