@@ -7,14 +7,16 @@ sudo make install
 
 mlterm will not run under Windows. Windows binaries of the other programs can be downloaded at 
 
-http://sourceforge.net/projects/corkobservatory/files
+https://github.com/corkobservatories/corkobservatories/releases
 
 For windows, make sure you keep the cygwin.dll with the exe files.
 
-== All operating systems
+=== All operating systems
 
-To calibrate raw readings and output engenering units, mldat and mlbin rely on the *.txt files that can be downloaded at
+To calibrate raw readings and output engenering units, mldat and mlbin rely on the \*.txt files that can be downloaded from the repository: https://github.com/corkobservatories/corkobservatories/tree/master/CalibrationFiles
 
-http://corkobservatory.svn.sourceforge.net/viewvc/corkobservatory/CalibrationFiles/
+All four files can be downloaded as [zip-archive](https://github.com/corkobservatories/corkobservatories/tree/master/CalibrationFiles) with the help of [DownGit](https://minhaskamal.github.io/DownGit)
+
+https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/corkobservatories/corkobservatories/tree/master/CalibrationFiles
 
 Note, that it is easy to keep them current if you check the calibration files out using SVN version control...
