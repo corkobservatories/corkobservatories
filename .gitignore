@@ -1,0 +1,8 @@
+*.o
+*.pyc
+
+C-tools/mlbin/mlbin
+C-tools/mldat/mldat9
+C-tools/mlterm/mlterm
+C-tools/mlterm/mlterm_vpn
+
