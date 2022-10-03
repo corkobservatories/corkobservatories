@@ -1,0 +1,10 @@
+name: cork_python27
+channels:
+  - conda-forge
+  - defaults
+  
+dependencies:
+  - python=2.7
+  - numpy=1.6.2
+  - matplotlib
+  - requests
